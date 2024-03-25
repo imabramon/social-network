@@ -1,0 +1,17 @@
+"use client";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
+const Header = ({}) => {
+	return (
+		<HeaderStl>
+ 			Header works!
+ 		</HeaderStl>
+	);
+};
+
+export const HeaderStl = styled.div``;
+Header.propTypes = {};
+
+export default Header;
