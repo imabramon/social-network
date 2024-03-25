@@ -1,4 +1,14 @@
 {
     "reactCreateComponent.settings.defaultRoute": "src/components",
-    "reactCreateComponent.settings.language": "javascript"
+    "reactCreateComponent.settings.language": "javascript",
+    "reactCreateComponent.settings.web.pageType": "file",
+    "reactCreateComponent.settings.createTypes": false,
+    "reactCreateComponent.settings.native.styleSheet": false,
+    "reactCreateComponent.settings.platform": "web",
+    "reactCreateComponent.settings.web.typeStyle": "component",
+    "reactCreateComponent.settings.web.styleSheet": "sass",
+    "reactCreateComponent.settings.quickSuggestions": [
+        "src/components",
+        "app/components"
+    ]
 }
