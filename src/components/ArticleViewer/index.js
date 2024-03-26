@@ -1,1 +1,1 @@
-export { default as ArticleViewer } from './ArticleViewer';
+export{default as default} from './ArticleViewer';

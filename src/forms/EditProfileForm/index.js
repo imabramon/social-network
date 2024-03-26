@@ -1,1 +1,1 @@
-export { default as EditProfileForm } from './EditProfileForm';
+export{default as default} from './EditProfileForm';

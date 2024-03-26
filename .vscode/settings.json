@@ -10,5 +10,6 @@
     "reactCreateComponent.settings.quickSuggestions": [
         "src/components",
         "app/components"
-    ]
+    ],
+    "reactCreateComponent.settings.createBarrel": true
 }
