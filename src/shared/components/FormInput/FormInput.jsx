@@ -3,14 +3,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { Input, InputTitle, Label } from '../../ui';
 
-const FormInput = ({title, invalidText, inputProps, titleProps, variant={}}) => {
+const FormInput = ({title, invalidText, inputProps, titleProps, variant={}, inputSlot}) => {
 	return (
 		<Label>
 			<InputTitle {...variant.titleProps} {...titleProps}>{title}</InputTitle>
-			<Input {...variant.inputProps} {...inputProps} invalidText={invalidText}/>
+			{inputSlot ??  <Input {...variant.inputProps} {...inputProps} invalidText={invalidText}/>}
 		</Label>
 	);
 };
+
+FormInput.defaultProps = {
+    inputSlot: undefined,
+}
 
 export const FormVariant = {
     Email: {
@@ -25,5 +29,7 @@ export const FormVariant = {
         }
 	}
 };
+
+
 
 export default FormInput;
