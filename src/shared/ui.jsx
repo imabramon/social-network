@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import {Link as RouterLink} from "react-router-dom";
+
 import { withProps } from "./utils/withProps";
 
 export const Header = styled.h2`
@@ -65,9 +67,21 @@ export const Input = styled.input`
     margin: 0px;
     width: 100%;
 
-    &::placeholder{
+    ::placeholder{
         color: #BFBFBF;
     }
+
+    :invalid{
+        border-color: #F5222D;
+
+        ::after{
+            content: ${withProps('invalidText', 'Invalid value')};
+            position: relative;
+            transform: translateY(-20px);
+        }
+    }
+
+
 `;
 
 export const Label = styled.label`
@@ -105,15 +119,37 @@ export const Container = styled.div`
     --padding-vertical: ${withProps('paddingVertical', '8px')};
     --padding-horizontal: ${withProps('paddingHorizontal', '8px')};
     padding: var(--padding-vertical) var(--padding-horizontal);
-    width: ${withProps('width', 'auto')}
+    width: ${withProps('width', 'auto')};
 `;
 
 export const Background = styled.div`
     background-color: #EBEEF3;
     display: flex;
-    align-content: center;
+    align-items: center;
+    justify-items: center;
     flex-direction: column;
     min-height: 100%;
 `;
 
 export const ProxyForm = styled.form``;
+
+export const Link = styled(RouterLink)`
+    text-decoration: none;
+    color: #1890FF;
+`;
+
+export const Paragraph = styled.p`
+    text-align: center;
+    margin: 0;
+    font-size: ${withProps('fontSize', 'inherit')};
+`
+
+export const SubText = styled.span`
+    color: #8C8C8C;
+`
+
+export const Divider = styled.div`
+    width: 100%;
+    height: 1px;
+    background-color:#E8E8E8; 
+`
