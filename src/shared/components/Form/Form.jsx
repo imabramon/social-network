@@ -1,14 +1,37 @@
 "use client";
 import React from 'react';
 import styled from 'styled-components';
+import { Container, FormTitle, ProxyForm, VStack } from '../../ui';
+import Button from '../Button';
 
-const Form = ({}) => {
+const Form = ({children, formProps, sumbitText, onSubmit, sub, sup, title}) => {
 	return (
-		<FormStl>
- 			Form works!
- 		</FormStl>
+		<Container paddingVertical='48px' paddingHorizontal='32px' width='384px'>
+			<ProxyForm {...formProps} onSubmit={onSubmit}>
+				<VStack gap='21px'>
+					<FormTitle>{title}</FormTitle>
+					<VStack gap='12px'>
+						{children}
+					</VStack>
+					{sup}
+					<Button.Normal.Filled.Info.Wide>{sumbitText}</Button.Normal.Filled.Info.Wide>
+					{sub}
+				</VStack>
+			</ProxyForm>
+		</Container>
 	);
 };
+
+Form.defaultProps = {
+	children: [], 
+	formProps: {}, 
+	title: 'Форма',
+	sumbitText: 'Отправить', 
+	onSubmit: ()=>{},
+	sub: <span>Form subtitle</span>,
+	sup: <span>Form suptitle</span>,
+}
+
 
 export const FormStl = styled.div``;
 

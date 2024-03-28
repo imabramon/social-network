@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { withProps } from "./utils/withProps";
 
 export const Header = styled.h2`
     color: #1890FF;
@@ -31,6 +32,7 @@ export const VStack = styled.div`
     flex-direction: column;
     width: 100%;
     height: 100%;
+    gap: ${withProps('gap', 0)};
 `
 
 export const HStack = styled.div`
@@ -61,6 +63,7 @@ export const Input = styled.input`
     border-radius: 4px;
     padding: 8px 12px;
     margin: 0px;
+    width: 100%;
 
     &::placeholder{
         color: #BFBFBF;
@@ -74,6 +77,7 @@ export const Label = styled.label`
     margin: 0px;
     padding: 0px;
     align-items: flex-start;
+    width: 100%;
 `;
 
 export const InputTitle = styled.span`
@@ -87,12 +91,21 @@ export const FormTitle = styled.h2`
     font-size: 20px;
     line-height: 28px;
     font-weight: medium;
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    margin: 0;
 `
 
 export const Container = styled.div`
-    border: 1px solid #262626;
+    background-color: white;
+    border: 1px solid #D9D9D9;
     border-radius: 6px;
     box-shadow: 0px 22px 106px rgba(0, 0, 0, 0.07), 0px 9.19107px 44.2843px rgba(0, 0, 0, 0.0503198), 0px 4.91399px 23.6765px rgba(0, 0, 0, 0.0417275), 0px 2.75474px 13.2728px rgba(0, 0, 0, 0.035), 0px 1.46302px 7.04911px rgba(0, 0, 0, 0.0282725), 0px 0.608796px 2.93329px rgba(0, 0, 0, 0.0196802);
+    --padding-vertical: ${withProps('paddingVertical', '8px')};
+    --padding-horizontal: ${withProps('paddingHorizontal', '8px')};
+    padding: var(--padding-vertical) var(--padding-horizontal);
+    width: ${withProps('width', 'auto')}
 `;
 
 export const Background = styled.div`

@@ -103,7 +103,8 @@ const Wide = css`
     width: ${props => props.width ?? "auto"};
     text-align: center;
     height: fit-content;
-    padding: var(--padding-verical) unset;
+    padding-top:var(--padding-vertical);
+    padding-bottom:var(--padding-vertical);
 `
 
 /*
