@@ -28,8 +28,8 @@ Form.defaultProps = {
 	title: 'Форма',
 	sumbitText: 'Отправить', 
 	onSubmit: ()=>{},
-	sub: <span>Form subtitle</span>,
-	sup: <span>Form suptitle</span>,
+	sub: null,
+	sup: null,
 }
 
 

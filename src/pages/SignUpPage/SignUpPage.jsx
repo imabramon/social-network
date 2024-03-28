@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import styled from 'styled-components';
-import SignUpForm from '../../forms/SignUpForm/SignUpForm';
+import SignUpForm from '../../forms/SignUpForm';
 
 const SignUpPage = ({}) => {
 	return (

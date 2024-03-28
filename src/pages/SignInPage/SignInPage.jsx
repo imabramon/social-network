@@ -1,15 +1,19 @@
 "use client";
 import React from 'react';
 import styled from 'styled-components';
+import SignInForm from '../../forms/SignInForm';
 
 const SignInPage = ({}) => {
 	return (
 		<SignInPageStl>
- 			SignInPage works!
+ 			<SignInForm/>
  		</SignInPageStl>
 	);
 };
 
-export const SignInPageStl = styled.div``;
+export const SignInPageStl = styled.div`
+	width: 384px;
+	height: fit-content;
+`;
 
 export default SignInPage;
