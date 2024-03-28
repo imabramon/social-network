@@ -119,7 +119,7 @@ export const Container = styled.div`
     --padding-vertical: ${withProps('paddingVertical', '8px')};
     --padding-horizontal: ${withProps('paddingHorizontal', '8px')};
     padding: var(--padding-vertical) var(--padding-horizontal);
-    width: ${withProps('width', 'auto')};
+    width: ${withProps('width', '100%')};
 `;
 
 export const Background = styled.div`

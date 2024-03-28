@@ -6,7 +6,7 @@ import Button from '../Button';
 
 const Form = ({children, formProps, sumbitText, onSubmit, sub, sup, title}) => {
 	return (
-		<Container paddingVertical='48px' paddingHorizontal='32px' width='384px'>
+		<Container paddingVertical='48px' paddingHorizontal='32px'>
 			<ProxyForm {...formProps} onSubmit={onSubmit}>
 				<VStack gap='21px'>
 					<FormTitle>{title}</FormTitle>
