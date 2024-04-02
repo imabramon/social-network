@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-const useInput = (value) => {
-  const [state, setState] = useState(value)
+const useInput = (value, clearValue = value) => {
+  const [state, setState] = useState(value);
   const onChange = (e) => {
-    setState(e.target.value)
-  }
+    setState(e.target.value);
+  };
   const clear = () => {
-    setState(value)
-  }
-  return [state, onChange, clear, setState]
-}
+    setState(clearValue);
+  };
+  return [state, onChange, clear, setState];
+};
 
-export default useInput
+export default useInput;
