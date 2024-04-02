@@ -1,21 +1,19 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import CreateArticleForm from '../../forms/CreateArticleForm';
+import ArticleForm from '../../forms/ArticleForm';
 
 const CreateArticlePage = ({}) => {
-	return (
-		<CreateArticlePageStl>
- 			<CreateArticleForm />
- 		</CreateArticlePageStl>
-	);
+  return (
+    <CreateArticlePageStl>
+      <ArticleForm title={'Create new article'} sumbitText={'Send'} />
+    </CreateArticlePageStl>
+  );
 };
 
 export const CreateArticlePageStl = styled.div`
-	width: 938px;
-	height: fit-content;
+  width: 938px;
+  height: fit-content;
 `;
-
-
 
 export default withRouter(CreateArticlePage);
