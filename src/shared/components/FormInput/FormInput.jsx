@@ -1,20 +1,24 @@
 'use client';
 import React from 'react';
-import styled from 'styled-components';
 import { Input, InputTitle, Label } from '../../ui';
-import { useForm } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
+import { FormInputError } from './FormInputError';
+import { withReactHookValidation } from '../../utils/validation';
 
 const FormInput = ({
   title,
-  invalidText,
   inputProps,
   titleProps,
   variant = {},
   inputSlot,
+  validation,
   value,
-  required,
 }) => {
-  const { register } = useForm();
+  const {
+    register,
+    formState: { errors },
+    watch,
+  } = useFormContext();
 
   return (
     <Label>
@@ -25,29 +29,35 @@ const FormInput = ({
         <Input
           {...variant.inputProps}
           {...inputProps}
-          invalidText={invalidText}
           value={value}
-          {...register(title, { required })}
+          {...register(
+            title,
+            withReactHookValidation(watch, validation, title),
+          )}
         />
       )}
+      <FormInputError error={errors[title]}>
+        {errors?.[title]?.message}
+      </FormInputError>
     </Label>
   );
 };
 
 FormInput.defaultProps = {
   inputSlot: undefined,
+  invalidText: 'Invalid',
+  validationConfig: {},
+  variant: {
+    validationConfig: {},
+    dinamycValidate: () => ({}),
+  },
+  dinamycValidateConfig: {},
 };
 
 export const FormVariant = {
-  Email: {
-    inputProps: {
-      type: 'email',
-    },
-  },
   Password: {
     inputProps: {
       type: 'password',
-      minLength: '6',
     },
   },
 };

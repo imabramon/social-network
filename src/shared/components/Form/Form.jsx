@@ -3,30 +3,37 @@ import React from 'react';
 import styled from 'styled-components';
 import { Container, FormTitle, ProxyForm, VStack } from '../../ui';
 import Button from '../Button';
+import { FormProvider, useForm } from 'react-hook-form';
 
 const Form = ({
   children,
   formProps,
   sumbitText,
-  onSubmit,
   sub,
   sup,
   title,
   submitButton,
   submitButtonProps,
+  onSubmit: submitHandler,
 }) => {
   const SubmitButton = submitButton;
+  const methods = useForm();
+  const { handleSubmit } = methods;
   return (
     <Container $paddingvertical="48px" $paddinghorizontal="32px">
-      <ProxyForm {...formProps} onSubmit={onSubmit}>
-        <VStack $gap="21px">
-          <FormTitle>{title}</FormTitle>
-          <VStack $gap="12px">{children}</VStack>
-          {sup}
-          <SubmitButton {...submitButtonProps}>{sumbitText}</SubmitButton>
-          {sub}
-        </VStack>
-      </ProxyForm>
+      <FormProvider {...methods}>
+        <ProxyForm {...formProps} onSubmit={handleSubmit(submitHandler)}>
+          <VStack $gap="21px">
+            <FormTitle>{title}</FormTitle>
+            <VStack $gap="12px">{children}</VStack>
+            {sup}
+            <SubmitButton {...submitButtonProps} type="submit">
+              {sumbitText}
+            </SubmitButton>
+            {sub}
+          </VStack>
+        </ProxyForm>
+      </FormProvider>
     </Container>
   );
 };

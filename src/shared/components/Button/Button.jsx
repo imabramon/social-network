@@ -4,7 +4,9 @@ import styled, { css } from 'styled-components';
 import { makeComponentTree } from '../../utils/makeComponentTree';
 import { withProps } from '../../utils/withProps';
 
-const ButtonReset = styled.button.attrs(() => ({ type: 'button' }))`
+const ButtonReset = styled.button.attrs((props) => ({
+  type: props.type ?? 'button',
+}))`
   border: none;
   margin: 0;
   padding: 0;

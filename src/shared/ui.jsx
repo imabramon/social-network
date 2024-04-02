@@ -70,16 +70,6 @@ export const Input = styled.input`
   ::placeholder {
     color: #bfbfbf;
   }
-
-  :invalid {
-    border-color: #f5222d;
-
-    ::after {
-      content: ${withProps('invalidText', 'Invalid value')};
-      position: relative;
-      transform: translateY(-20px);
-    }
-  }
 `;
 
 export const Label = styled.label`
