@@ -39,7 +39,8 @@ export const VStack = styled.div`
 
 export const HStack = styled.div`
     display: flex;
-    width: 100%;
+    width: ${withProps('width', '100%')};
+    gap: ${withProps('gap', 0)};
     height: 100%;
 `
 
@@ -65,7 +66,7 @@ export const Input = styled.input`
     border-radius: 4px;
     padding: 8px 12px;
     margin: 0px;
-    width: 100%;
+    width: ${withProps('width', '100%')};
 
     ::placeholder{
         color: #BFBFBF;

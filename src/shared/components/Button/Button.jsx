@@ -3,7 +3,7 @@
 import styled, {css} from 'styled-components';
 import { makeComponentTree } from '../../utils/makeComponentTree';
 
-const ButtonReset = styled.button`
+const ButtonReset = styled.button.attrs(()=>({type: 'button'}))`
     border: none;
     margin: 0;
     padding: 0;
