@@ -65,7 +65,7 @@ const FormList = ({ title, value }) => {
   const inputElements = [...savedInputs, lastInputElement];
 
   return (
-    <VStack gap="5px">
+    <VStack $gap="5px">
       <InputTitle>{title}</InputTitle>
       {inputElements}
     </VStack>

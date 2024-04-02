@@ -17,11 +17,11 @@ const Form = ({
 }) => {
   const SubmitButton = submitButton;
   return (
-    <Container paddingVertical="48px" paddingHorizontal="32px">
+    <Container $paddingvertical="48px" $paddinghorizontal="32px">
       <ProxyForm {...formProps} onSubmit={onSubmit}>
-        <VStack gap="21px">
+        <VStack $gap="21px">
           <FormTitle>{title}</FormTitle>
-          <VStack gap="12px">{children}</VStack>
+          <VStack $gap="12px">{children}</VStack>
           {sup}
           <SubmitButton {...submitButtonProps}>{sumbitText}</SubmitButton>
           {sub}

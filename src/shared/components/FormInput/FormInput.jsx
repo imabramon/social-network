@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Input, InputTitle, Label } from '../../ui';
+import { useForm } from 'react-hook-form';
 
 const FormInput = ({
   title,
@@ -11,7 +12,10 @@ const FormInput = ({
   variant = {},
   inputSlot,
   value,
+  required,
 }) => {
+  const { register } = useForm();
+
   return (
     <Label>
       <InputTitle {...variant.titleProps} {...titleProps}>
@@ -23,6 +27,7 @@ const FormInput = ({
           {...inputProps}
           invalidText={invalidText}
           value={value}
+          {...register(title, { required })}
         />
       )}
     </Label>
