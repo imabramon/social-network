@@ -1,25 +1,27 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { withProps } from './utils/withProps';
 
 export const Header = styled.h2`
+  margin: 0;
+  padding: 0;
   color: #1890ff;
-  font-weight: 400px;
+  font-weight: normal;
   font-size: 20px;
   line-height: 28px;
 `;
 
 export const NameTitle = styled.span`
-  font-weight: 400px;
+  font-weight: 400;
   font-size: 18px;
   line-height: 28px;
 `;
 
 export const Tag = styled.span`
   display: inline-block;
-  height: fit-content;
-  width: 20px;
+  height: 20px;
+  width: fit-content;
   border: 1px solid black;
   border-radius: 2px;
   line-height: 20px;
@@ -32,7 +34,7 @@ export const Tag = styled.span`
 export const VStack = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: ${withProps('width', '100%')};
   height: 100%;
   gap: ${withProps('$gap', 0)};
 `;
@@ -41,11 +43,13 @@ export const HStack = styled.div`
   display: flex;
   width: ${withProps('width', '100%')};
   gap: ${withProps('$gap', 0)};
-  height: 100%;
+  height: ${withProps('height', '100%')}%;
+  justify-content: ${withProps('$justifyContent', 'unset')};
 `;
 
 export const Text = styled.p`
-  line-height: 22px;
+  margin: 0;
+  line-height: 12px;
   font-weight: 400px;
   font-size: 12px;
 `;
@@ -114,6 +118,7 @@ export const Container = styled.div`
   --padding-horizontal: ${withProps('$paddinghorizontal', '8px')};
   padding: var(--padding-vertical) var(--padding-horizontal);
   width: ${withProps('width', '100%')};
+  height: ${withProps('height', '100%')};
 `;
 
 export const Background = styled.div`
@@ -146,4 +151,21 @@ export const Divider = styled.div`
   width: 100%;
   height: 1px;
   background-color: #e8e8e8;
+`;
+
+export const visuallyHidden = css`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+`;
+
+export const HiddenSpan = styled.span`
+  ${visuallyHidden}
 `;
