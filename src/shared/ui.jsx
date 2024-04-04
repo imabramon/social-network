@@ -37,6 +37,8 @@ export const VStack = styled.div`
   width: ${withProps('width', '100%')};
   height: 100%;
   gap: ${withProps('$gap', 0)};
+  justify-content: ${withProps('$justifyContent', 'unset')};
+  align-items: ${withProps('$alignItems', 'unset')};
 `;
 
 export const HStack = styled.div`
@@ -45,6 +47,7 @@ export const HStack = styled.div`
   gap: ${withProps('$gap', 0)};
   height: ${withProps('height', '100%')}%;
   justify-content: ${withProps('$justifyContent', 'unset')};
+  align-items: ${withProps('$alignItems', 'unset')};
 `;
 
 export const Text = styled.p`

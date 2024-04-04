@@ -1,17 +1,26 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PostCard from '../../components/PostCard/PostCard';
 import { VStack } from '../../shared/ui';
+import Pagination from '../../shared/components/Pagination/Pagination';
 
 const FeedPage = () => {
-  useEffect(() => {}, []);
+  const posts = Array.from({ length: 5 })
+    .fill(0)
+    .map(() => <PostCard />);
+
+  const [currentPage, setCurrentPage] = useState(1);
   return (
     <FeedPageStl>
-      <VStack $gap="26px">
-        <PostCard />
-        <PostCard />
-        <PostCard />
+      <VStack $gap="26px" $alignItems="center">
+        {posts}
+        <Pagination
+          current={currentPage}
+          onPageChange={(value) => {
+            setCurrentPage(value);
+          }}
+        />
       </VStack>
     </FeedPageStl>
   );

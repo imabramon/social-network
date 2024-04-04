@@ -53,7 +53,7 @@ const Pagination = ({ buttonsCount, maxPage, current, onPageChange: pageChangeHa
     });
 
   return (
-    <HStack>
+    <HStack width="fit-content">
       <ButtonNoBorder disabled={current === 1} onClick={() => pageChangeHandler(current - 1)}>
         <ArrowLeft />
       </ButtonNoBorder>
@@ -66,7 +66,7 @@ const Pagination = ({ buttonsCount, maxPage, current, onPageChange: pageChangeHa
 };
 
 Pagination.defaultProps = {
-  buttonsCount: 3,
+  buttonsCount: 5,
   maxPage: 10,
 };
 
