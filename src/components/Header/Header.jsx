@@ -5,19 +5,26 @@ import { HStack, NameTitle, Avatar } from '../../shared/ui';
 import Button from '../../shared/components/Button';
 import withLoggedSwitch from '../../shared/hoc/withLoggedSwitch';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { PagePath } from '../../consts/pagePath';
 
 const ButtonNoBorder = Button.Normal.NoBorder.Neutral.Fit;
 const ButtonHighlighted = Button.Normal.Highlighted.Action.Fit;
 const ButtonHighlightedSmall = Button.Small.Highlighted.Action.Fit;
 const ButtonHighlightedNeutral = Button.Normal.Highlighted.Neutral.Fit;
 
-const UnloggedSide = () => (
-  <HStack width="fit-content" $gap="20px">
-    <ButtonNoBorder>Sign In</ButtonNoBorder>
-    <ButtonHighlighted>Sign Up</ButtonHighlighted>
-  </HStack>
-);
+const UnloggedSide = () => {
+  const navigate = useNavigate();
+  const goToSignUp = () => navigate(PagePath.userSignUp);
+  const goToSignIn = () => navigate(PagePath.userSignIn);
 
+  return (
+    <HStack width="fit-content" $gap="20px">
+      <ButtonNoBorder onClick={goToSignIn}>Sign In</ButtonNoBorder>
+      <ButtonHighlighted onClick={goToSignUp}>Sign Up</ButtonHighlighted>
+    </HStack>
+  );
+};
 const UserData = () => {
   const name = useSelector((state) => state.userData.name);
   const avatarUrl = useSelector((state) => state.userData.avatarUrl);
