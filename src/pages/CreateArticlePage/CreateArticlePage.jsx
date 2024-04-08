@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import ArticleForm from '../../forms/ArticleForm';
 
@@ -16,4 +15,4 @@ export const CreateArticlePageStl = styled.div`
   height: fit-content;
 `;
 
-export default withRouter(CreateArticlePage);
+export default CreateArticlePage;

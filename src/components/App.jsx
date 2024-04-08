@@ -1,7 +1,5 @@
-import { Redirect, Route, Router, Switch } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
-
 import FeedPage from '../pages/FeedPage';
 import ViewArticlePage from '../pages/ViewArticlePage';
 import SignInPage from '../pages/SignInPage';
@@ -35,30 +33,25 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const history = createBrowserHistory();
-
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Header />
-      <Background>
-        <Router history={history}>
-          <Switch>
-            <Route exact path="/">
-              <Redirect to={PagePath.feed} push />
-            </Route>
-            <Route exact path={PagePath.feed} component={FeedPage} />
-            <Route exact path={PagePath.article.config} component={ViewArticlePage} />
-            <Route exact path={PagePath.createArticle} component={CreateArcticlePage} />
-            <Route exact path={PagePath.editArticle.config} component={EditArticlePage} />
-            <Route exact path={PagePath.userSignIn} component={SignInPage} />
-            <Route exact path={PagePath.userSignUp} component={SignUpPage} />
-            <Route exact path={PagePath.userEdit} component={EditProfilePage} />
+      <BrowserRouter>
+        <Header />
+        <Background>
+          <Routes>
+            <Route exact path={PagePath.feed} element={<FeedPage />} />
+            <Route exact path={PagePath.article.config} element={<ViewArticlePage />} />
+            <Route exact path={PagePath.createArticle} element={<CreateArcticlePage />} />
+            <Route exact path={PagePath.editArticle.config} element={<EditArticlePage />} />
+            <Route exact path={PagePath.userSignIn} element={<SignInPage />} />
+            <Route exact path={PagePath.userSignUp} element={<SignUpPage />} />
+            <Route exact path={PagePath.userEdit} element={<EditProfilePage />} />
             <Route component={NotFoundPage} />
-          </Switch>
-        </Router>
-      </Background>
+          </Routes>
+        </Background>
+      </BrowserRouter>
     </>
   );
 }
