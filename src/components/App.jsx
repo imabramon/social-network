@@ -12,6 +12,7 @@ import EditArticlePage from '../pages/EditArticlePage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import Header from './Header';
 import { Background } from '../shared/ui';
+import { PagePath } from '../consts/pagePath';
 
 const GlobalStyle = createGlobalStyle`
   :root{
@@ -45,15 +46,15 @@ function App() {
         <Router history={history}>
           <Switch>
             <Route exact path="/">
-              <Redirect to="/articles/" push />
+              <Redirect to={PagePath.feed} push />
             </Route>
-            <Route exact path="/articles/" component={FeedPage} />
-            <Route exact path="/articles/view/:id/" component={ViewArticlePage} />
-            <Route exact path="/articles/create" component={CreateArcticlePage} />
-            <Route exact path="/articles/edit/:id/" component={EditArticlePage} />
-            <Route exact path="/user/signin/" component={SignInPage} />
-            <Route exact path="/user/signup/" component={SignUpPage} />
-            <Route exact path="/user/edit/:id" component={EditProfilePage} />
+            <Route exact path={PagePath.feed} component={FeedPage} />
+            <Route exact path={PagePath.article.config} component={ViewArticlePage} />
+            <Route exact path={PagePath.createArticle} component={CreateArcticlePage} />
+            <Route exact path={PagePath.editArticle.config} component={EditArticlePage} />
+            <Route exact path={PagePath.userSignIn} component={SignInPage} />
+            <Route exact path={PagePath.userSignUp} component={SignUpPage} />
+            <Route exact path={PagePath.userEdit} component={EditProfilePage} />
             <Route component={NotFoundPage} />
           </Switch>
         </Router>
