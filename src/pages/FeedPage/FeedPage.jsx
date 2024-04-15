@@ -4,21 +4,31 @@ import styled from 'styled-components';
 import PostCard from '../../components/PostCard/PostCard';
 import { VStack } from '../../shared/ui';
 import Pagination from '../../shared/components/Pagination/Pagination';
+import { useSearchParams } from 'react-router-dom';
+
+const NonNaNPass = (value) => {
+  const numb = Number(value);
+  if (value && !isNaN(numb)) return numb;
+  return undefined;
+};
 
 const FeedPage = () => {
   const posts = Array.from({ length: 5 })
     .fill(0)
     .map((_, index) => <PostCard id={index} />);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  console.log(searchParams.get('page'));
+  const page = NonNaNPass(searchParams.get('page')) ?? 1;
+
   return (
     <FeedPageStl>
       <VStack $gap="26px" $alignItems="center">
         {posts}
         <Pagination
-          current={currentPage}
+          current={page}
           onPageChange={(value) => {
-            setCurrentPage(value);
+            setSearchParams({ ...searchParams, page: value });
           }}
         />
       </VStack>
