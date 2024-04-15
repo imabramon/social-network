@@ -1,19 +1,11 @@
 'use client';
 import React from 'react';
 import styled from 'styled-components';
-import {
-  Avatar,
-  Container,
-  HStack,
-  Header,
-  NameTitle,
-  SubText,
-  Tag,
-  Text,
-  VStack,
-} from '../../shared/ui';
+import { Avatar, Container, HStack, Header, NameTitle, SubText, Tag, Text, VStack } from '../../shared/ui';
 import LikesIcon from '../../shared/components/LikesIcon';
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router';
+import { PagePath } from '../../consts/pagePath';
 
 //Alias for more understanding
 const PostTitle = HStack;
@@ -42,19 +34,15 @@ const formatDate = (date) => {
   return format(new Date(date), 'MMMM d, yyyy');
 };
 
-const PostCard = ({
-  title,
-  likes,
-  tags,
-  dedscription,
-  userInfo: { name, avatarUrl },
-  date,
-}) => {
+const PostCard = ({ id, title, likes, tags, dedscription, userInfo: { name, avatarUrl }, date }) => {
+  const navigate = useNavigate();
+  const goToArticle = () => navigate(PagePath.article.goTo(id));
+
   return (
     <Container $paddingvertical="16px" $paddinghorizontal="16px" height="140px">
       <HStack $justifyContent="space-between">
         <PostInfo width="682px" $gap="4px">
-          <PostTitle height="fit-content" $gap="13px">
+          <PostTitle height="fit-content" $gap="13px" onClick={goToArticle}>
             <Header>{title}</Header>
             <LikesIcon value={likes} />
           </PostTitle>

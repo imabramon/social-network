@@ -8,7 +8,7 @@ import Pagination from '../../shared/components/Pagination/Pagination';
 const FeedPage = () => {
   const posts = Array.from({ length: 5 })
     .fill(0)
-    .map(() => <PostCard />);
+    .map((_, index) => <PostCard id={index} />);
 
   const [currentPage, setCurrentPage] = useState(1);
   return (
