@@ -48,6 +48,7 @@ export const HStack = styled.div`
   height: ${withProps('height', '100%')}%;
   justify-content: ${withProps('$justifyContent', 'unset')};
   align-items: ${withProps('$alignItems', 'unset')};
+  align-self: ${withProps('$alignSelf', 'unset')};
 `;
 
 export const Text = styled.p`

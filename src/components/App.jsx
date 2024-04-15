@@ -41,7 +41,7 @@ function App() {
         <Background>
           <Routes>
             <Route exact path={'/'} element={<Navigate to={PagePath.feed} />} />
-            <Route path={PagePath.feed} element={<FeedPage />} />
+            <Route exact path={PagePath.feed} element={<FeedPage />} />
             <Route exact path={PagePath.article.config} element={<ViewArticlePage />} />
             <Route exact path={PagePath.createArticle} element={<CreateArcticlePage />} />
             <Route exact path={PagePath.editArticle.config} element={<EditArticlePage />} />
