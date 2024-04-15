@@ -1,5 +1,5 @@
 const initialState = {
-  logged: false,
+  logged: true,
   userData: {
     name: 'abramon',
     avatarUrl:

@@ -17,7 +17,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Inter';
   }
 
-
   body{
     margin: 0;
     padding: 0;
@@ -41,6 +40,7 @@ function App() {
         <Header />
         <Background>
           <Routes>
+            <Route exact path={'/'} element={<Navigate to={PagePath.feed} />} />
             <Route exact path={PagePath.feed} element={<FeedPage />} />
             <Route exact path={PagePath.article.config} element={<ViewArticlePage />} />
             <Route exact path={PagePath.createArticle} element={<CreateArcticlePage />} />

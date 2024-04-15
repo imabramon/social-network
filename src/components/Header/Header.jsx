@@ -37,13 +37,18 @@ const UserData = () => {
   );
 };
 
-const LoggedSide = () => (
-  <HStack width="fit-content" $gap="20px" $alignItems="center">
-    <ButtonHighlightedSmall>Create article</ButtonHighlightedSmall>
-    <UserData />
-    <ButtonHighlightedNeutral>Log Out</ButtonHighlightedNeutral>
-  </HStack>
-);
+const LoggedSide = () => {
+  const navigate = useNavigate();
+  const goToCreateArticle = () => navigate(PagePath.createArticle);
+
+  return (
+    <HStack width="fit-content" $gap="20px" $alignItems="center">
+      <ButtonHighlightedSmall onClick={goToCreateArticle}>Create article</ButtonHighlightedSmall>
+      <UserData />
+      <ButtonHighlightedNeutral>Log Out</ButtonHighlightedNeutral>
+    </HStack>
+  );
+};
 
 const Header = ({}) => {
   return (

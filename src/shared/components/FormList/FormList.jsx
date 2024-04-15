@@ -11,15 +11,12 @@ import { withDispatch } from './withDispatch';
 const FormList = ({ title, value }) => {
   const mappedValue = value.map((value) => ({ value }));
   const tags = [...mappedValue];
-  const lastTag = tags.pop().value;
+  const lastTag = tags.pop()?.value;
 
   const [inputs, dispatchInputs] = useReducer(inputsReducer, tags);
   const { add, remove, change } = withDispatch(inputActions, dispatchInputs);
 
-  const [lastInput, onLastInputChange, clearLastInput, setLastInput] = useInput(
-    lastTag ?? '',
-    '',
-  );
+  const [lastInput, onLastInputChange, clearLastInput, setLastInput] = useInput(lastTag ?? '', '');
 
   const savedInputs = inputs.map(({ value }, index) => {
     return (
