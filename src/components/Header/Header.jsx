@@ -28,12 +28,18 @@ const UnloggedSide = () => {
   );
 };
 const UserData = () => {
-  const name = useSelector((state) => state.userData.name);
-  const avatarUrl = useSelector((state) => state.userData.avatarUrl);
-
+  const name = useSelector((state) => state.userData.username);
+  const avatarUrl = useSelector((state) => state.userData.image);
+  const navigate = useNavigate();
   return (
     <HStack width="fit-content" $gap="15px" $alignItems="center">
-      <NameTitle>{name}</NameTitle>
+      <NameTitle
+        onClick={() => {
+          navigate(PagePath.userEdit);
+        }}
+      >
+        {name}
+      </NameTitle>
       <Avatar src={avatarUrl} />
     </HStack>
   );

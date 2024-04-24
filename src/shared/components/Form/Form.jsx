@@ -22,7 +22,7 @@ const Form = ({
   return (
     <Container $paddingvertical="48px" $paddinghorizontal="32px">
       <FormProvider {...methods}>
-        <ProxyForm {...formProps} onSubmit={handleSubmit(submitHandler(getValues()))}>
+        <ProxyForm {...formProps} onSubmit={handleSubmit(submitHandler)}>
           <VStack $gap="21px">
             <FormTitle>{title}</FormTitle>
             <VStack $gap="12px">{children}</VStack>

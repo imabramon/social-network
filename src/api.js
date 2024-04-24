@@ -12,7 +12,6 @@ export const login = async (email, password) => {
       user: { email, password },
     });
     token = answer.data.user.token;
-    //console.log(answer);
     return answer.data.user;
   } catch (e) {
     throw e;
@@ -26,7 +25,8 @@ export const getUserInfo = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log('user info res', res);
+
+    return res.data.user;
   } catch (e) {}
 };
 
@@ -39,9 +39,26 @@ export const register = async (username, email, password) => {
     const answer = await apiServise.post('/users', {
       user: { username, email, password },
     });
-    console.log(answer);
     token = answer.data.user.token;
     return answer.data.user;
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const update = async (username, email, password, url) => {
+  try {
+    await apiServise.put(
+      '/user',
+      {
+        user: { username, email, password, image: url },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
   } catch (e) {
     throw e;
   }

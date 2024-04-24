@@ -18,7 +18,6 @@ const FeedPage = () => {
     .map((_, index) => <PostCard id={index} />);
 
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams.get('page'));
   const page = NonNaNPass(searchParams.get('page')) ?? 1;
 
   return (

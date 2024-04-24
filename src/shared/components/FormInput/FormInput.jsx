@@ -5,15 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormInputError } from './FormInputError';
 import { withReactHookValidation } from '../../utils/validation';
 
-const FormInput = ({
-  title,
-  inputProps,
-  titleProps,
-  variant = {},
-  inputSlot,
-  validation,
-  value,
-}) => {
+const FormInput = ({ title, inputProps, titleProps, variant = {}, inputSlot, validation, value, autoComplete }) => {
   const {
     register,
     formState: { errors },
@@ -29,16 +21,12 @@ const FormInput = ({
         <Input
           {...variant.inputProps}
           {...inputProps}
-          value={value}
-          {...register(
-            title,
-            withReactHookValidation(watch, validation, title),
-          )}
+          {...register(title, withReactHookValidation(watch, validation, title))}
+          autoComplete={autoComplete}
+          defaultValue={value}
         />
       )}
-      <FormInputError error={errors[title]}>
-        {errors?.[title]?.message}
-      </FormInputError>
+      <FormInputError error={errors[title]}>{errors?.[title]?.message}</FormInputError>
     </Label>
   );
 };

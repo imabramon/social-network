@@ -26,13 +26,11 @@ const SignInForm = ({}) => {
       onSubmit={async (values) => {
         const { Email: email, Password: password } = values;
         try {
-          const { username } = await login(email, password);
-          console.log(username);
-          dispatch(loginUser(username));
+          const { username, image } = await login(email, password);
+          const res = await getUserInfo();
+          dispatch(loginUser({ username, email, image }));
           navigate(PagePath.feed);
-        } catch (e) {
-          console.log(e);
-        }
+        } catch (e) {}
       }}
     >
       <FormInput
