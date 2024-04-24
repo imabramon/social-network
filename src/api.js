@@ -33,3 +33,16 @@ export const getUserInfo = async () => {
 export const logout = () => {
   token = null;
 };
+
+export const register = async (username, email, password) => {
+  try {
+    const answer = await apiServise.post('/users', {
+      user: { username, email, password },
+    });
+    console.log(answer);
+    token = answer.data.user.token;
+    return answer.data.user;
+  } catch (e) {
+    throw e;
+  }
+};
