@@ -18,11 +18,11 @@ const Form = ({
 }) => {
   const SubmitButton = submitButton;
   const methods = useForm();
-  const { handleSubmit } = methods;
+  const { handleSubmit, getValues } = methods;
   return (
     <Container $paddingvertical="48px" $paddinghorizontal="32px">
       <FormProvider {...methods}>
-        <ProxyForm {...formProps} onSubmit={handleSubmit(submitHandler)}>
+        <ProxyForm {...formProps} onSubmit={handleSubmit(submitHandler(getValues()))}>
           <VStack $gap="21px">
             <FormTitle>{title}</FormTitle>
             <VStack $gap="12px">{children}</VStack>

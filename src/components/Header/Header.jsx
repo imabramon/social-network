@@ -4,9 +4,11 @@ import styled from 'styled-components';
 import { HStack, NameTitle, Avatar } from '../../shared/ui';
 import Button from '../../shared/components/Button';
 import withLoggedSwitch from '../../shared/hoc/withLoggedSwitch';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { PagePath } from '../../consts/pagePath';
+import { logout } from '../../api';
+import { logoutUser } from '../../store/actions';
 
 const ButtonNoBorder = Button.Normal.NoBorder.Neutral.Fit;
 const ButtonHighlighted = Button.Normal.Highlighted.Action.Fit;
@@ -40,12 +42,20 @@ const UserData = () => {
 const LoggedSide = () => {
   const navigate = useNavigate();
   const goToCreateArticle = () => navigate(PagePath.createArticle);
+  const dispatch = useDispatch();
 
   return (
     <HStack width="fit-content" $gap="20px" $alignItems="center">
       <ButtonHighlightedSmall onClick={goToCreateArticle}>Create article</ButtonHighlightedSmall>
       <UserData />
-      <ButtonHighlightedNeutral>Log Out</ButtonHighlightedNeutral>
+      <ButtonHighlightedNeutral
+        onClick={() => {
+          logout();
+          dispatch(logoutUser());
+        }}
+      >
+        Log Out
+      </ButtonHighlightedNeutral>
     </HStack>
   );
 };
