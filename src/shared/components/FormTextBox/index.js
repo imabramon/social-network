@@ -1,1 +1,1 @@
-export { default as default } from './FormTextBox';
+export { default } from './FormTextBox';

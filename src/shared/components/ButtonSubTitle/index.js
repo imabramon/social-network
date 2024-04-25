@@ -1,1 +1,1 @@
-export{default as default} from './ButtonSubTitle';
+export { default } from './ButtonSubTitle';

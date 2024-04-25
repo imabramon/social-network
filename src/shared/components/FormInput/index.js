@@ -1,2 +1,1 @@
-export{default as default, FormVariant} from './FormInput';
-
+export { default, FormVariant } from './FormInput';

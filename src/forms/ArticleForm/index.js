@@ -1,1 +1,1 @@
-export { default as default } from './ArticleForm';
+export { default } from './ArticleForm';

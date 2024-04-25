@@ -51,7 +51,12 @@ export const update = async (username, email, password, url) => {
     await apiServise.put(
       '/user',
       {
-        user: { username, email, password, image: url },
+        user: {
+          username,
+          email,
+          password,
+          image: url,
+        },
       },
       {
         headers: {
