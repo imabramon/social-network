@@ -10,12 +10,15 @@ export const Header = styled.h2`
   font-weight: normal;
   font-size: 20px;
   line-height: 28px;
+  width: ${withProps('width', 'unset')};
 `;
 
 export const NameTitle = styled.span`
   font-weight: 400;
   font-size: 18px;
   line-height: 28px;
+  text-align: right;
+  width: ${withProps('width', 'unset')};
 `;
 
 export const Tag = styled.span`

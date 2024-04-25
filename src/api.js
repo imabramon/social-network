@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { mapResponseToPosts } from './shared/utils/mapResponseToPosts';
 
 let token = null;
 
@@ -67,4 +68,21 @@ export const update = async (username, email, password, url) => {
   } catch (e) {
     throw e;
   }
+};
+
+const pageLength = 10;
+
+const getSkipCountFromLength = (page) => pageLength * (page - 1);
+
+export const getArticles = async (page = 1) => {
+  const {
+    data: { articles },
+  } = await apiServise.get('/articles', {
+    params: {
+      limit: pageLength,
+      offset: getSkipCountFromLength(page),
+    },
+  });
+
+  return articles.map(mapResponseToPosts);
 };

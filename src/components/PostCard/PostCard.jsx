@@ -6,6 +6,8 @@ import LikesIcon from '../../shared/components/LikesIcon';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router';
 import { PagePath } from '../../consts/pagePath';
+import { componentFactory } from '../../shared/utils/componentFactory.jsx';
+import ContentMayOverflow from '../../shared/components/ContentMayOverflow';
 
 //Alias for more understanding
 const PostTitle = HStack;
@@ -17,18 +19,8 @@ const DateTitle = styled.span`
   font-size: 12px;
   line-height: 12px;
   color: rgba(0, 0, 0, 0.5);
+  text-align: right;
 `;
-
-const componentFactory = (data, ComponentBasic) =>
-  data.map((item, index) => {
-    const { key = index, id, ...restItem } = item;
-    switch (true) {
-      case typeof item === 'object':
-        return <ComponentBasic key={id ?? key} {...restItem} />;
-      default:
-        return <ComponentBasic key={id ?? key}>{item}</ComponentBasic>;
-    }
-  });
 
 const formatDate = (date) => {
   return format(new Date(date), 'MMMM d, yyyy');
@@ -38,12 +30,16 @@ const PostCard = ({ id, title, likes, tags, dedscription, userInfo: { name, avat
   const navigate = useNavigate();
   const goToArticle = () => navigate(PagePath.article.goTo(id));
 
+  const isTitleOverflow = title.length > 61;
+
   return (
     <Container $paddingvertical="16px" $paddinghorizontal="16px" height="140px">
       <HStack $justifyContent="space-between">
         <PostInfo width="682px" $gap="4px">
           <PostTitle height="fit-content" $gap="13px" onClick={goToArticle}>
-            <Header>{title}</Header>
+            <Header width={isTitleOverflow ? '610px' : 'fit-content'}>
+              <ContentMayOverflow isOverflow={isTitleOverflow}>{title}</ContentMayOverflow>
+            </Header>
             <LikesIcon value={likes} />
           </PostTitle>
           <TagsContainer height="fit-content" $gap="8px">
@@ -51,12 +47,12 @@ const PostCard = ({ id, title, likes, tags, dedscription, userInfo: { name, avat
           </TagsContainer>
           <Text>{dedscription}</Text>
         </PostInfo>
-        <SideInfo width="141px">
-          <TextInfo>
+        <SideInfo width="205px" $justifyContent="flex-end" $gap="12px">
+          <TextInfo $alignItem="flex-end" width="147px">
             <NameTitle>{name}</NameTitle>
             <DateTitle>{formatDate(date)}</DateTitle>
           </TextInfo>
-          <Avatar src={avatarUrl} size="" />
+          <Avatar src={avatarUrl} size="46px" />
         </SideInfo>
       </HStack>
     </Container>

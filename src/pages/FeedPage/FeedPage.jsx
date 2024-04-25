@@ -5,6 +5,8 @@ import PostCard from '../../components/PostCard/PostCard';
 import { VStack } from '../../shared/ui';
 import Pagination from '../../shared/components/Pagination/Pagination';
 import { useSearchParams } from 'react-router-dom';
+import { componentFactory } from '../../shared/utils/componentFactory';
+import { getArticles } from '../../api';
 
 const NonNaNPass = (value) => {
   const numb = Number(value);
@@ -13,19 +15,29 @@ const NonNaNPass = (value) => {
 };
 
 const FeedPage = () => {
-  const posts = Array.from({ length: 5 })
-    .fill(0)
-    .map((_, index) => <PostCard id={index} />);
+  const [posts, setPost] = useState([]);
+  // const posts = Array.from({ length: 5 })
+  //   .fill(0)
+  //   .map((_, index) => <PostCard id={index} />);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const page = NonNaNPass(searchParams.get('page')) ?? 1;
+  const [maxPage, setMaxPAge] = useState(10);
+
+  useEffect(() => {
+    (async () => {
+      const loadedPosts = await getArticles(page);
+      setPost(loadedPosts);
+    })();
+  }, [page]);
 
   return (
     <FeedPageStl>
       <VStack $gap="26px" $alignItems="center">
-        {posts}
+        {componentFactory(posts, PostCard)}
         <Pagination
           current={page}
+          maxPage={maxPage}
           onPageChange={(value) => {
             setSearchParams({ ...searchParams, page: value });
           }}

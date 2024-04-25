@@ -67,7 +67,7 @@ const Pagination = ({ buttonsCount, maxPage, current, onPageChange: pageChangeHa
 
 Pagination.defaultProps = {
   buttonsCount: 5,
-  maxPage: 10,
+  maxPage: 1,
 };
 
 export default Pagination;
