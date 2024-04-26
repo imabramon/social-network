@@ -17,7 +17,9 @@ const FormInput = ({ title, inputProps, titleProps, variant = {}, inputSlot, val
       <InputTitle {...variant.titleProps} {...titleProps}>
         {title}
       </InputTitle>
-      {inputSlot ?? (
+      {inputSlot ? (
+        inputSlot
+      ) : (
         <Input
           {...variant.inputProps}
           {...inputProps}

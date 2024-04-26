@@ -86,3 +86,32 @@ export const getArticles = async (page = 1) => {
 
   return articles.map(mapResponseToPosts);
 };
+
+export const createArticle = async (title, description, body, tags) => {
+  try {
+    const {
+      data: {
+        article: { slug },
+      },
+    } = await apiServise.post(
+      '/articles',
+      {
+        article: {
+          title,
+          description,
+          body,
+          tags,
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return slug;
+  } catch (e) {
+    throw e;
+  }
+};

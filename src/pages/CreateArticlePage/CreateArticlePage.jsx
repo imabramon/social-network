@@ -1,11 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import ArticleForm from '../../forms/ArticleForm';
+import { useNavigate } from 'react-router';
+import { createArticle } from '../../api';
 
 const CreateArticlePage = ({}) => {
+  const navigate = useNavigate();
   return (
     <CreateArticlePageStl>
-      <ArticleForm title={'Create new article'} sumbitText={'Send'} />
+      <ArticleForm
+        title={'Create new article'}
+        sumbitText={'Send'}
+        onSubmit={(values) => {
+          const { Title: title, 'Short description': description, Text: body, Tags: tags } = values;
+          (async () => {
+            await createArticle(title, description, body, tags);
+          })();
+        }}
+      />
     </CreateArticlePageStl>
   );
 };

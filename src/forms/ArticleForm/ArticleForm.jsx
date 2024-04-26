@@ -8,13 +8,14 @@ import Button from '../../shared/components/Button';
 
 const submitButton = Button.Normal.Filled.Info.Fit;
 
-const ArticleForm = ({ title, sumbitText, articleData }) => {
+const ArticleForm = ({ title, sumbitText, articleData, onSubmit }) => {
   return (
     <Form
       title={title}
       sumbitText={sumbitText}
       submitButton={submitButton}
       submitButtonProps={{ width: '319px' }}
+      onSubmit={onSubmit}
     >
       <FormInput title={'Title'} value={articleData.title} />
       <FormInput title={'Short description'} value={articleData.description} />
