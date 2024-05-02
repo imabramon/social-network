@@ -1,29 +1,48 @@
 'use client';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import ArticleForm from '../../forms/ArticleForm';
-
-const testData = {
-  title: 'Important Article Title',
-  description: 'Some short description that displays in atricles list',
-  text: `# Title
-
-Some paragraph in article
-
-## h2 title
-- list 1
-- list 2`,
-  tags: ['programming', 'haskell', 'fp'],
-};
+import { useNavigate, useParams } from 'react-router';
+import { loadArticle, editArticle } from '../../api';
+import { PagePath } from '../../consts/pagePath';
 
 const EditArticlePage = ({}) => {
+  const {id} = useParams();
+  const navigate = useNavigate();
+  const [isLoaded, setLoaded] = useState(false)
+  const [articleData, setArticleData] = useState({})
+  const [textSlot, setTextSlot] = useState('Loading...')
+
+  useEffect(()=>{
+    (async ()=>{
+      try{
+        const data = await loadArticle(id)
+        
+        setArticleData(data);
+        setLoaded(true)
+      }catch(e){
+        setTextSlot('Something wrong :^(')
+        throw e
+      }
+    })()
+  }, [])
+
+
   return (
     <EditArticlePageStl>
-      <ArticleForm
+      {isLoaded ?<ArticleForm
         title={'Edit article'}
         sumbitText={'Send'}
-        articleData={testData}
-      />
+        articleData={articleData}
+        onSubmit={(data)=>{
+          const { Title: title, 'Short description': description, Text: body, Tags: tags } = data;
+
+          (async()=>{
+            await editArticle(id, title, description, body, tags);
+            navigate(PagePath.article.goTo(id))
+          })()
+        }}
+      /> : <span>{textSlot}</span>}
     </EditArticlePageStl>
   );
 };

@@ -82,8 +82,6 @@ export const getArticles = async (page = 1) => {
     },
   });
 
-  console.log(articles)
-
   return articles.map(mapResponseToPosts);
 };
 
@@ -131,3 +129,32 @@ export const loadArticle = async (id) => {
     throw e;
   }
 }
+
+export const editArticle = async (id, title, description, body, tags) => {
+  try {
+    const {
+      data: {
+        article: { slug },
+      },
+    } = await apiServise.put(
+      `/articles/${encodeURI(id)}`,
+      {
+        article: {
+          title,
+          description,
+          body,
+          tagList: tags,
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return slug;
+  } catch (e) {
+    throw e;
+  }
+};

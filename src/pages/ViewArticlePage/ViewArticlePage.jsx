@@ -7,7 +7,6 @@ import { useParams, useSearchParams } from 'react-router-dom';
 
 const ViewArticlePage = ({}) => {
   const {id} = useParams();
-  console.log(id)
   const [isLoaded, setLoaded] = useState(false)
   const [articleData, setArticleData] = useState({})
   const [textSlot, setTextSlot] = useState('Loading...')
@@ -16,7 +15,6 @@ const ViewArticlePage = ({}) => {
     (async ()=>{
       try{
         const data = await loadArticle(id)
-        console.log(data)
         setArticleData(data);
         setLoaded(true)
       }catch(e){

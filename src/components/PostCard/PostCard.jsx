@@ -26,7 +26,7 @@ const formatDate = (date) => {
   return format(new Date(date), 'MMMM d, yyyy');
 };
 
-const PostCard = ({ id, title, likes, tags, dedscription, userInfo: { name, avatarUrl }, date }) => {
+const PostCard = ({ id, title, likes, tags, description, userInfo: { name, avatarUrl }, date }) => {
   const navigate = useNavigate();
   const goToArticle = () => navigate(PagePath.article.goTo(id));
 
@@ -45,7 +45,7 @@ const PostCard = ({ id, title, likes, tags, dedscription, userInfo: { name, avat
           <TagsContainer height="fit-content" $gap="8px">
             {tags ? componentFactory(tags, Tag) : null}
           </TagsContainer>
-          <Text>{dedscription}</Text>
+          <Text>{description}</Text>
         </PostInfo>
         <SideInfo width="205px" $justifyContent="flex-end" $gap="12px">
           <TextInfo $alignItem="flex-end" width="147px">

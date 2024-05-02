@@ -9,6 +9,8 @@ import remarkGfm from 'remark-gfm';
 import Button from '../../shared/components/Button/Button';
 import { useSelector } from 'react-redux';
 import Popup from 'reactjs-popup';
+import { useNavigate } from 'react-router';
+import { PagePath } from '../../consts/pagePath'; 
 
 //Alias for more understanding
 const PostHeader = HStack;
@@ -114,10 +116,11 @@ const ArticleControl = ({ onDelete, onEdit }) => {
   );
 };
 
-const ArticleViewer = ({ title, likes, tags, dedscription, userInfo: {name, avatarUrl }, date, text }) => {
+const ArticleViewer = ({id, title, likes, tags, description, userInfo: {name, avatarUrl }, date, text }) => {
+  const navigate = useNavigate()
   const loggedUserName = useSelector((state) => state.userData.username);
   const deleteArticle = () => console.log('article delete');
-  const editArticle = () => console.log('article edit');
+  const editArticle = () => navigate(PagePath.editArticle.goTo(id));
   const sideSlot = loggedUserName === name ? <ArticleControl onDelete={deleteArticle} onEdit={editArticle} /> : null;
 
   return (
@@ -132,7 +135,7 @@ const ArticleViewer = ({ title, likes, tags, dedscription, userInfo: {name, avat
             <TagsContainer height="fit-content" $gap="8px">
               {componentFactory(tags, Tag)}
             </TagsContainer>
-            <Text>{dedscription}</Text>
+            <Text>{description}</Text>
           </PostInfo>
           <SideInfo width="141px" $gap="30px">
             <UserInfo>
