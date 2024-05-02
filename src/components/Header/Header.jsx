@@ -67,10 +67,11 @@ const LoggedSide = () => {
 };
 
 const Header = ({}) => {
+  const navigate = useNavigate()
   return (
     <HeaderStl>
       <HStack $justifyContent="space-between" $alignItems="center">
-        <span>Realworld Blog</span>
+        <span onClick={()=>{navigate(PagePath.feed)}}>Realworld Blog</span>
         {withLoggedSwitch(LoggedSide, UnloggedSide)}
       </HStack>
     </HeaderStl>

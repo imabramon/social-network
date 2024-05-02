@@ -35,7 +35,7 @@ const PostCard = ({ id, title, likes, tags, dedscription, userInfo: { name, avat
   return (
     <Container $paddingvertical="16px" $paddinghorizontal="16px" height="140px">
       <HStack $justifyContent="space-between">
-        <PostInfo width="682px" $gap="4px">
+        <PostInfo width="682px" $gap="4px"> 
           <PostTitle height="fit-content" $gap="13px" onClick={goToArticle}>
             <Header width={isTitleOverflow ? '610px' : 'fit-content'}>
               <ContentMayOverflow isOverflow={isTitleOverflow}>{title}</ContentMayOverflow>
@@ -43,7 +43,7 @@ const PostCard = ({ id, title, likes, tags, dedscription, userInfo: { name, avat
             <LikesIcon value={likes} />
           </PostTitle>
           <TagsContainer height="fit-content" $gap="8px">
-            {componentFactory(tags, Tag)}
+            {tags ? componentFactory(tags, Tag) : null}
           </TagsContainer>
           <Text>{dedscription}</Text>
         </PostInfo>
@@ -59,17 +59,17 @@ const PostCard = ({ id, title, likes, tags, dedscription, userInfo: { name, avat
   );
 };
 
-PostCard.defaultProps = {
-  title: 'Some article title',
-  likes: 12,
-  tags: ['tag1', 'tag2', 'tag3'],
-  dedscription: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. `,
-  userInfo: {
-    name: 'John Doe',
-    avatarUrl:
-      'https://sun9-60.userapi.com/s/v1/ig2/nHV2SqpSQ7Q7BkqK8_cWXYwZf4e4weIdpe1DGcW9_e4SkyK0Rw-acA4baUuUMLu_o8imF5xwLf0tD5hfH7zxHAQx.jpg?size=50x50&quality=95&crop=84,40,509,509&ava=1',
-  },
-  date: '2020-03-05',
-};
+// PostCard.defaultProps = {
+//   title: 'Some article title',
+//   likes: 12,
+//   tags: ['tag1', 'tag2', 'tag3'],
+//   dedscription: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. `,
+//   userInfo: {
+//     name: 'John Doe',
+//     avatarUrl:
+//       'https://sun9-60.userapi.com/s/v1/ig2/nHV2SqpSQ7Q7BkqK8_cWXYwZf4e4weIdpe1DGcW9_e4SkyK0Rw-acA4baUuUMLu_o8imF5xwLf0tD5hfH7zxHAQx.jpg?size=50x50&quality=95&crop=84,40,509,509&ava=1',
+//   },
+//   date: '2020-03-05',
+// };
 
 export default PostCard;

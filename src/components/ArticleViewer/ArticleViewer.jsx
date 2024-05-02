@@ -114,11 +114,11 @@ const ArticleControl = ({ onDelete, onEdit }) => {
   );
 };
 
-const ArticleViewer = ({ title, likes, tags, dedscription, userInfo: { id, name, avatarUrl }, date, text }) => {
-  const loggedUserId = useSelector((state) => state.userData.id);
+const ArticleViewer = ({ title, likes, tags, dedscription, userInfo: {name, avatarUrl }, date, text }) => {
+  const loggedUserName = useSelector((state) => state.userData.username);
   const deleteArticle = () => console.log('article delete');
   const editArticle = () => console.log('article edit');
-  const sideSlot = loggedUserId === id ? <ArticleControl onDelete={deleteArticle} onEdit={editArticle} /> : null;
+  const sideSlot = loggedUserName === name ? <ArticleControl onDelete={deleteArticle} onEdit={editArticle} /> : null;
 
   return (
     <Container $paddingvertical="16px" $paddinghorizontal="16px" height="fit-content">
@@ -153,27 +153,27 @@ const ArticleViewer = ({ title, likes, tags, dedscription, userInfo: { id, name,
   );
 };
 
-ArticleViewer.defaultProps = {
-  title: 'Some article title',
-  likes: 12,
-  tags: ['tag1', 'tag2', 'tag3'],
-  dedscription: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. `,
-  userInfo: {
-    id: 0,
-    name: 'John Doe',
-    avatarUrl:
-      'https://sun9-60.userapi.com/s/v1/ig2/nHV2SqpSQ7Q7BkqK8_cWXYwZf4e4weIdpe1DGcW9_e4SkyK0Rw-acA4baUuUMLu_o8imF5xwLf0tD5hfH7zxHAQx.jpg?size=50x50&quality=95&crop=84,40,509,509&ava=1',
-  },
-  date: '2020-03-05',
-  text: `
- # Title
+// ArticleViewer.defaultProps = {
+//   title: 'Some article title',
+//   likes: 12,
+//   tags: ['tag1', 'tag2', 'tag3'],
+//   dedscription: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. `,
+//   userInfo: {
+//     id: 0,
+//     name: 'John Doe',
+//     avatarUrl:
+//       'https://sun9-60.userapi.com/s/v1/ig2/nHV2SqpSQ7Q7BkqK8_cWXYwZf4e4weIdpe1DGcW9_e4SkyK0Rw-acA4baUuUMLu_o8imF5xwLf0tD5hfH7zxHAQx.jpg?size=50x50&quality=95&crop=84,40,509,509&ava=1',
+//   },
+//   date: '2020-03-05',
+//   text: `
+//  # Title
 
-Some paragraph in article
+// Some paragraph in article
 
-## h2 title
-- list 1
-- list 2 
-  `,
-};
+// ## h2 title
+// - list 1
+// - list 2 
+//   `,
+// };
 
 export default ArticleViewer;

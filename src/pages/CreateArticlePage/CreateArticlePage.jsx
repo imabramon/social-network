@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ArticleForm from '../../forms/ArticleForm';
 import { useNavigate } from 'react-router';
 import { createArticle } from '../../api';
+import { PagePath } from '../../consts/pagePath';
 
 const CreateArticlePage = ({}) => {
   const navigate = useNavigate();
@@ -14,7 +15,8 @@ const CreateArticlePage = ({}) => {
         onSubmit={(values) => {
           const { Title: title, 'Short description': description, Text: body, Tags: tags } = values;
           (async () => {
-            await createArticle(title, description, body, tags);
+            const id = await createArticle(title, description, body, tags);
+            navigate(PagePath.article.goTo(id))
           })();
         }}
       />

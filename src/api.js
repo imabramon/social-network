@@ -8,15 +8,13 @@ export const apiServise = axios.create({
 });
 
 export const login = async (email, password) => {
-  try {
+  
     const answer = await apiServise.post('/users/login', {
       user: { email, password },
     });
     token = answer.data.user.token;
     return answer.data.user;
-  } catch (e) {
-    throw e;
-  }
+ 
 };
 
 export const getUserInfo = async () => {
@@ -84,6 +82,8 @@ export const getArticles = async (page = 1) => {
     },
   });
 
+  console.log(articles)
+
   return articles.map(mapResponseToPosts);
 };
 
@@ -100,7 +100,7 @@ export const createArticle = async (title, description, body, tags) => {
           title,
           description,
           body,
-          tags,
+          tagList: tags,
         },
       },
       {
@@ -115,3 +115,19 @@ export const createArticle = async (title, description, body, tags) => {
     throw e;
   }
 };
+
+export const loadArticle = async (id) => {
+  try {
+    const {
+      data: {
+        article,
+      },
+    } = await apiServise.get(
+      `/articles/${encodeURI(id)}`
+    );
+
+    return mapResponseToPosts(article);
+  } catch (e) {
+    throw e;
+  }
+}

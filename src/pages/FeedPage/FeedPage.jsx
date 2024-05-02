@@ -16,10 +16,6 @@ const NonNaNPass = (value) => {
 
 const FeedPage = () => {
   const [posts, setPost] = useState([]);
-  // const posts = Array.from({ length: 5 })
-  //   .fill(0)
-  //   .map((_, index) => <PostCard id={index} />);
-
   const [searchParams, setSearchParams] = useSearchParams();
   const page = NonNaNPass(searchParams.get('page')) ?? 1;
   const [maxPage, setMaxPAge] = useState(10);
