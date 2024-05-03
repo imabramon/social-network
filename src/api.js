@@ -158,3 +158,17 @@ export const editArticle = async (id, title, description, body, tags) => {
     throw e;
   }
 };
+
+export const deleteArticleReq = async (id) => {
+ 
+    const res = await apiServise.delete(
+    `/articles/${encodeURI(id)}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+  return res
+
+} 

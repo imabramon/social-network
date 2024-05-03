@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import Popup from 'reactjs-popup';
 import { useNavigate } from 'react-router';
 import { PagePath } from '../../consts/pagePath'; 
+import { deleteArticleReq, getUserInfo } from '../../api';
 
 //Alias for more understanding
 const PostHeader = HStack;
@@ -90,6 +91,7 @@ const PopupText = styled.p`
 `;
 
 const PopUpConfirm = ({ onAccess, onClose }) => {
+  
   return (
     <PopUpContainer>
       <VStack $gap="12px">
@@ -104,6 +106,7 @@ const PopUpConfirm = ({ onAccess, onClose }) => {
 };
 
 const ArticleControl = ({ onDelete, onEdit }) => {
+  console.log('render')
   return (
     <HStack $gap="12px">
       <Popup trigger={<DeleteButton>Delete</DeleteButton>} position="right center">
@@ -117,9 +120,17 @@ const ArticleControl = ({ onDelete, onEdit }) => {
 };
 
 const ArticleViewer = ({id, title, likes, tags, description, userInfo: {name, avatarUrl }, date, text }) => {
+  
   const navigate = useNavigate()
   const loggedUserName = useSelector((state) => state.userData.username);
-  const deleteArticle = () => console.log('article delete');
+  const deleteArticle = async () => {
+      try{
+        await deleteArticleReq(id)
+        navigate(PagePath.feed)
+      } catch (e){
+        console.log(e)
+      }
+    };
   const editArticle = () => navigate(PagePath.editArticle.goTo(id));
   const sideSlot = loggedUserName === name ? <ArticleControl onDelete={deleteArticle} onEdit={editArticle} /> : null;
 
