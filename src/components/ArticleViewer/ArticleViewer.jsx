@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import { Avatar, Container, HStack, Header, NameTitle, SubText, Tag, Text, VStack } from '../../shared/ui';
 import LikesIcon from '../../shared/components/LikesIcon';
@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import Popup from 'reactjs-popup';
 import { useNavigate } from 'react-router';
 import { PagePath } from '../../consts/pagePath'; 
-import { deleteArticleReq, getUserInfo } from '../../api';
+import { deleteArticleReq, getUserInfo, markFavorite, markUnfavorite } from '../../api';
 
 //Alias for more understanding
 const PostHeader = HStack;
@@ -106,7 +106,7 @@ const PopUpConfirm = ({ onAccess, onClose }) => {
 };
 
 const ArticleControl = ({ onDelete, onEdit }) => {
-  console.log('render')
+
   return (
     <HStack $gap="12px">
       <Popup trigger={<DeleteButton>Delete</DeleteButton>} position="right center">
@@ -119,7 +119,7 @@ const ArticleControl = ({ onDelete, onEdit }) => {
   );
 };
 
-const ArticleViewer = ({id, title, likes, tags, description, userInfo: {name, avatarUrl }, date, text }) => {
+const ArticleViewer = ({id, title, likes: propLikes, tags, description, userInfo: {name, avatarUrl }, date, text, isLiked }) => {
   
   const navigate = useNavigate()
   const loggedUserName = useSelector((state) => state.userData.username);
@@ -132,7 +132,28 @@ const ArticleViewer = ({id, title, likes, tags, description, userInfo: {name, av
       }
     };
   const editArticle = () => navigate(PagePath.editArticle.goTo(id));
-  const sideSlot = loggedUserName === name ? <ArticleControl onDelete={deleteArticle} onEdit={editArticle} /> : null;
+  const sideSlot = loggedUserName === name ? <ArticleControl onDelete={deleteArticle} onEdit={editArticle}  /> : null;
+  const [likes, setLikes] = useState(propLikes)
+  const likeArticle = async () => {
+    try{
+      await markFavorite(id)
+      setLikes((val)=>val+1)
+      return true
+    }catch(e){
+      console.log(e);
+      return false;
+    }
+  }
+  const unlikeArticle = async () => {
+    try{
+      await markUnfavorite(id)
+      setLikes((val)=>val-1)
+      return true
+    }catch(e){
+      console.log(e);
+      return false;
+    }
+  }
 
   return (
     <Container $paddingvertical="16px" $paddinghorizontal="16px" height="fit-content">
@@ -141,7 +162,7 @@ const ArticleViewer = ({id, title, likes, tags, description, userInfo: {name, av
           <PostInfo width="682px" $gap="4px">
             <PostTitle height="fit-content" $gap="13px">
               <Header>{title}</Header>
-              <LikesIcon value={likes} />
+              <LikesIcon value={likes} onLike={likeArticle} onUnlike={unlikeArticle} isLiked={isLiked}/>
             </PostTitle>
             <TagsContainer height="fit-content" $gap="8px">
               {componentFactory(tags, Tag)}

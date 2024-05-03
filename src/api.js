@@ -80,6 +80,9 @@ export const getArticles = async (page = 1) => {
       limit: pageLength,
       offset: getSkipCountFromLength(page),
     },
+    headers: token ? {
+      Authorization: `Bearer ${token}`,
+    }: null
   });
 
   return articles.map(mapResponseToPosts);
@@ -170,5 +173,35 @@ export const deleteArticleReq = async (id) => {
     }
   )
   return res
+
+} 
+
+export const markFavorite = async (id) => {
+ 
+  const res = await apiServise.post(
+  `/articles/${encodeURI(id)}/favorite`, null, 
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+)
+return res
+
+} 
+
+export const markUnfavorite = async (id) => {
+ 
+  const res = await apiServise.delete(
+  `/articles/${encodeURI(id)}/favorite`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  
+)
+
+return res
 
 } 

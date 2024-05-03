@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Avatar, Container, HStack, Header, NameTitle, SubText, Tag, Text, VStack } from '../../shared/ui';
 import LikesIcon from '../../shared/components/LikesIcon';
@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router';
 import { PagePath } from '../../consts/pagePath';
 import { componentFactory } from '../../shared/utils/componentFactory.jsx';
 import ContentMayOverflow from '../../shared/components/ContentMayOverflow';
+import { markFavorite, markUnfavorite } from '../../api.js';
 
 //Alias for more understanding
 const PostTitle = HStack;
@@ -26,9 +27,30 @@ const formatDate = (date) => {
   return format(new Date(date), 'MMMM d, yyyy');
 };
 
-const PostCard = ({ id, title, likes, tags, description, userInfo: { name, avatarUrl }, date }) => {
+const PostCard = ({ id, title, likes: propLikes, tags, description, userInfo: { name, avatarUrl }, date, isLiked }) => {
   const navigate = useNavigate();
   const goToArticle = () => navigate(PagePath.article.goTo(id));
+  const [likes, setLikes] = useState(propLikes)
+  const likeArticle = async () => {
+    try{
+      await markFavorite(id)
+      setLikes((val)=>val+1)
+      return true
+    }catch(e){
+      console.log(e);
+      return false;
+    }
+  }
+  const unlikeArticle = async () => {
+    try{
+      await markUnfavorite(id)
+      setLikes((val)=>val-1)
+      return true
+    }catch(e){
+      console.log(e);
+      return false;
+    }
+  }
 
   const isTitleOverflow = title.length > 61;
 
@@ -36,11 +58,11 @@ const PostCard = ({ id, title, likes, tags, description, userInfo: { name, avata
     <Container $paddingvertical="16px" $paddinghorizontal="16px" height="140px">
       <HStack $justifyContent="space-between">
         <PostInfo width="682px" $gap="4px"> 
-          <PostTitle height="fit-content" $gap="13px" onClick={goToArticle}>
-            <Header width={isTitleOverflow ? '610px' : 'fit-content'}>
-              <ContentMayOverflow isOverflow={isTitleOverflow}>{title}</ContentMayOverflow>
+          <PostTitle height="fit-content" $gap="13px" >
+            <Header width={isTitleOverflow ? '610px' : 'fit-content'} onClick={goToArticle}>
+              <ContentMayOverflow isOverflow={isTitleOverflow} >{title}</ContentMayOverflow>
             </Header>
-            <LikesIcon value={likes} />
+            <LikesIcon value={likes} onLike={likeArticle} onUnlike={unlikeArticle} isLiked={isLiked}/>
           </PostTitle>
           <TagsContainer height="fit-content" $gap="8px">
             {tags ? componentFactory(tags, Tag) : null}
