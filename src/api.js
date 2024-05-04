@@ -124,7 +124,12 @@ export const loadArticle = async (id) => {
         article,
       },
     } = await apiServise.get(
-      `/articles/${encodeURI(id)}`
+      `/articles/${encodeURI(id)}`, 
+      {
+        headers: token ? {
+          Authorization: `Bearer ${token}`,
+        }: null
+      }
     );
 
     return mapResponseToPosts(article);
