@@ -7,6 +7,7 @@ import Pagination from '../../shared/components/Pagination/Pagination';
 import { useSearchParams } from 'react-router-dom';
 import { componentFactory } from '../../shared/utils/componentFactory';
 import { getArticles } from '../../api';
+import LoadableContent from '../../shared/components/LoadableContent';
 
 const NonNaNPass = (value) => {
   const numb = Number(value);
@@ -30,7 +31,9 @@ const FeedPage = () => {
   return (
     <FeedPageStl>
       <VStack $gap="26px" $alignItems="center">
-        {componentFactory(posts, PostCard)}
+        <LoadableContent isLoading={posts.length === 0}>
+          {componentFactory(posts, PostCard)}
+        </LoadableContent>
         <Pagination
           current={page}
           maxPage={maxPage}

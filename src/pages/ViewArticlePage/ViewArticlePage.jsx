@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ArticleViewer from '../../components/ArticleViewer';
 import { loadArticle } from '../../api';
 import { useParams, useSearchParams } from 'react-router-dom';
+import LoadableContent from '../../shared/components/LoadableContent';
 
 const ViewArticlePage = ({}) => {
   const {id} = useParams();
@@ -23,7 +24,7 @@ const ViewArticlePage = ({}) => {
 
   return (
     <ViewArticlePageStl>
-     {isLoaded ? <ArticleViewer {...articleData} /> : <span>{textSlot}</span>}
+     <LoadableContent isLoading={!isLoaded}><ArticleViewer {...articleData} /></LoadableContent>
     </ViewArticlePageStl>
   );
 };
