@@ -18,15 +18,15 @@ export const login = async (email, password) => {
 };
 
 export const getUserInfo = async () => {
-  try {
-    const res = await apiServise.get('/user', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  
+  const res = await apiServise.get('/user', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-    return res.data.user;
-  } catch (e) {}
+  return res.data.user;
+  
 };
 
 export const logout = () => {
@@ -34,38 +34,30 @@ export const logout = () => {
 };
 
 export const register = async (username, email, password) => {
-  try {
-    const answer = await apiServise.post('/users', {
-      user: { username, email, password },
-    });
-    token = answer.data.user.token;
-    return answer.data.user;
-  } catch (e) {
-    throw e;
-  }
+  const answer = await apiServise.post('/users', {
+    user: { username, email, password },
+  });
+  token = answer.data.user.token;
+  return answer.data.user;
 };
 
 export const update = async (username, email, password, url) => {
-  try {
-    await apiServise.put(
-      '/user',
-      {
-        user: {
-          username,
-          email,
-          password,
-          image: url,
-        },
+  await apiServise.put(
+    '/user',
+    {
+      user: {
+        username,
+        email,
+        password,
+        image: url,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-  } catch (e) {
-    throw e;
-  }
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };
 
 const pageLength = 10;
@@ -89,7 +81,6 @@ export const getArticles = async (page = 1) => {
 };
 
 export const createArticle = async (title, description, body, tags) => {
-  try {
     const {
       data: {
         article: { slug },
@@ -112,59 +103,52 @@ export const createArticle = async (title, description, body, tags) => {
     );
 
     return slug;
-  } catch (e) {
-    throw e;
-  }
 };
 
 export const loadArticle = async (id) => {
-  try {
-    const {
-      data: {
-        article,
-      },
-    } = await apiServise.get(
-      `/articles/${encodeURI(id)}`, 
-      {
-        headers: token ? {
-          Authorization: `Bearer ${token}`,
-        }: null
-      }
-    );
+  
+  const {
+    data: {
+      article,
+    },
+  } = await apiServise.get(
+    `/articles/${encodeURI(id)}`, 
+    {
+      headers: token ? {
+        Authorization: `Bearer ${token}`,
+      }: null
+    }
+  );
 
-    return mapResponseToPosts(article);
-  } catch (e) {
-    throw e;
-  }
+  return mapResponseToPosts(article);
+  
+  
+  
 }
 
 export const editArticle = async (id, title, description, body, tags) => {
-  try {
-    const {
-      data: {
-        article: { slug },
+  const {
+    data: {
+      article: { slug },
+    },
+  } = await apiServise.put(
+    `/articles/${encodeURI(id)}`,
+    {
+      article: {
+        title,
+        description,
+        body,
+        tagList: tags,
       },
-    } = await apiServise.put(
-      `/articles/${encodeURI(id)}`,
-      {
-        article: {
-          title,
-          description,
-          body,
-          tagList: tags,
-        },
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    }
+  );
 
-    return slug;
-  } catch (e) {
-    throw e;
-  }
+  return slug;
 };
 
 export const deleteArticleReq = async (id) => {
@@ -196,17 +180,15 @@ return res
 } 
 
 export const markUnfavorite = async (id) => {
- 
   const res = await apiServise.delete(
-  `/articles/${encodeURI(id)}/favorite`,
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
-  
-)
+    `/articles/${encodeURI(id)}/favorite`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+    
+  )
 
-return res
-
+  return res
 } 

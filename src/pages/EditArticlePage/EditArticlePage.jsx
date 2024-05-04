@@ -13,18 +13,14 @@ const EditArticlePage = ({}) => {
   const [articleData, setArticleData] = useState({})
   const [textSlot, setTextSlot] = useState('Loading...')
 
-  useEffect(()=>{
-    (async ()=>{
-      try{
+  useEffect(async ()=>{
+    
         const data = await loadArticle(id)
         
         setArticleData(data);
         setLoaded(true)
-      }catch(e){
-        setTextSlot('Something wrong :^(')
-        throw e
-      }
-    })()
+      
+
   }, [])
 
 
@@ -38,8 +34,11 @@ const EditArticlePage = ({}) => {
           const { Title: title, 'Short description': description, Text: body, Tags: tags } = data;
 
           (async()=>{
-            await editArticle(id, title, description, body, tags);
-            navigate(PagePath.article.goTo(id))
+            try {await editArticle(id, title, description, body, tags);
+            navigate(PagePath.article.goTo(id))}
+            catch(e){
+              console.log('eee boy')
+            }
           })()
         }}
       /> : <span>{textSlot}</span>}

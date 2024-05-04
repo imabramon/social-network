@@ -33,13 +33,11 @@ const SignUpForm = ({}) => {
       sumbitText={'Create'}
       onSubmit={async (values) => {
         const { Username: username, 'Email address': email, Password: password } = values;
-        try {
+       
           await register(username, email, password);
           dispatch(loginUser(username));
           naviagte(PagePath.feed);
-        } catch (e) {
-          console.log(e);
-        }
+        
       }}
     >
       <FormInput title={'Username'} validation={[required('Это обязательное поле'), inRange(3, 20)('От 3 до 20')]} />

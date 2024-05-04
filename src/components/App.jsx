@@ -11,6 +11,7 @@ import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import Header from './Header';
 import { Background } from '../shared/ui';
 import { PagePath } from '../consts/pagePath';
+import ErrorBoundary from './ErrorBoundary';
 
 const GlobalStyle = createGlobalStyle`
   :root{
@@ -39,17 +40,19 @@ function App() {
       <BrowserRouter>
         <Header />
         <Background>
-          <Routes>
-            <Route exact path={'/'} element={<Navigate to={PagePath.feed} />} />
-            <Route exact path={PagePath.feed} element={<FeedPage />} />
-            <Route exact path={PagePath.article.config} element={<ViewArticlePage />} />
-            <Route exact path={PagePath.createArticle} element={<CreateArcticlePage />} />
-            <Route exact path={PagePath.editArticle.config} element={<EditArticlePage />} />
-            <Route exact path={PagePath.userSignIn} element={<SignInPage />} />
-            <Route exact path={PagePath.userSignUp} element={<SignUpPage />} />
-            <Route exact path={PagePath.userEdit} element={<EditProfilePage />} />
-            <Route component={NotFoundPage} />
-          </Routes>
+          <ErrorBoundary>
+            <Routes>
+              <Route exact path={'/'} element={<Navigate to={PagePath.feed} />} />
+              <Route exact path={PagePath.feed} element={<FeedPage />} />
+              <Route exact path={PagePath.article.config} element={<ViewArticlePage />} />
+              <Route exact path={PagePath.createArticle} element={<CreateArcticlePage />} />
+              <Route exact path={PagePath.editArticle.config} element={<EditArticlePage />} />
+              <Route exact path={PagePath.userSignIn} element={<SignInPage />} />
+              <Route exact path={PagePath.userSignUp} element={<SignUpPage />} />
+              <Route exact path={PagePath.userEdit} element={<EditProfilePage />} />
+              <Route component={NotFoundPage} />
+            </Routes>
+          </ErrorBoundary>
         </Background>
       </BrowserRouter>
     </>

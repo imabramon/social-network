@@ -20,14 +20,9 @@ const EditProfileForm = () => {
       sumbitText={'Save'}
       onSubmit={async (values) => {
         const { Username: username, 'Email address': email, 'Avatar image (url)': image, Password: password } = values;
-        //if (flag) return;x
-        try {
-          await update(username, email, password, image);
-          dispatch(updateUser({ username, email, password, image }));
-          flag = true;
-        } catch (e) {
-          console.log(e);
-        }
+    
+        await update(username, email, password, image);
+        dispatch(updateUser({ username, email, password, image }));
       }}
     >
       <FormInput

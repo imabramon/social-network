@@ -32,24 +32,18 @@ const PostCard = ({ id, title, likes: propLikes, tags, description, userInfo: { 
   const goToArticle = () => navigate(PagePath.article.goTo(id));
   const [likes, setLikes] = useState(propLikes)
   const likeArticle = async () => {
-    try{
+    
       await markFavorite(id)
       setLikes((val)=>val+1)
       return true
-    }catch(e){
-      console.log(e);
-      return false;
-    }
+    
   }
   const unlikeArticle = async () => {
-    try{
+    
       await markUnfavorite(id)
       setLikes((val)=>val-1)
       return true
-    }catch(e){
-      console.log(e);
-      return false;
-    }
+    
   }
 
   const isTitleOverflow = title.length > 61;

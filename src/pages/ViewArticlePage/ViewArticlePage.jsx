@@ -13,13 +13,11 @@ const ViewArticlePage = ({}) => {
 
   useEffect(()=>{
     (async ()=>{
-      try{
+     
         const data = await loadArticle(id)
         setArticleData(data);
         setLoaded(true)
-      }catch(e){
-        setTextSlot('Something wrong :^(')
-      }
+      
     })()
   }, [])
 

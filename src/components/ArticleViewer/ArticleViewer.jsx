@@ -124,35 +124,25 @@ const ArticleViewer = ({id, title, likes: propLikes, tags, description, userInfo
   const navigate = useNavigate()
   const loggedUserName = useSelector((state) => state.userData.username);
   const deleteArticle = async () => {
-      try{
-        await deleteArticleReq(id)
-        navigate(PagePath.feed)
-      } catch (e){
-        console.log(e)
-      }
+      await deleteArticleReq(id)
+      navigate(PagePath.feed)
     };
   const editArticle = () => navigate(PagePath.editArticle.goTo(id));
   const sideSlot = loggedUserName === name ? <ArticleControl onDelete={deleteArticle} onEdit={editArticle}  /> : null;
   const [likes, setLikes] = useState(propLikes)
   const likeArticle = async () => {
-    try{
+   
       await markFavorite(id)
       setLikes((val)=>val+1)
       return true
-    }catch(e){
-      console.log(e);
-      return false;
-    }
+  
   }
   const unlikeArticle = async () => {
-    try{
+   
       await markUnfavorite(id)
       setLikes((val)=>val-1)
       return true
-    }catch(e){
-      console.log(e);
-      return false;
-    }
+    
   }
 
   return (
