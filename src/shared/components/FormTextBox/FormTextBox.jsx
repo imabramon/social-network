@@ -23,7 +23,7 @@ const Textbox = styled.textarea`
 
 const FormTextBox = ({ value, ...props }) => {
   const { register } = useFormContext();
-  return <FormInput inputSlot={<Textbox defaultValue={value} rows={6} {...register(props.title)} />} {...props} />;
+  return <FormInput inputSlot={<Textbox defaultValue={value} rows={6} {...register(props.title)} placeholder={props.title} />} {...props} />;
 };
 
 export default FormTextBox;

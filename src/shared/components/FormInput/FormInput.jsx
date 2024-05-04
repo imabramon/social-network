@@ -26,6 +26,7 @@ const FormInput = ({ title, inputProps, titleProps, variant = {}, inputSlot, val
           {...register(title, withReactHookValidation(watch, validation, title))}
           autoComplete={autoComplete}
           defaultValue={value}
+          placeholder={title}
         />
       )}
       <FormInputError error={errors[title]}>{errors?.[title]?.message}</FormInputError>

@@ -20,7 +20,7 @@ const ArticleForm = ({ title, sumbitText, articleData, onSubmit }) => {
       <FormInput title={'Title'} value={articleData.title} />
       <FormInput title={'Short description'} value={articleData.description} />
       <FormTextBox title={'Text'} value={articleData.text} />
-      <FormList title={'Tags'} value={articleData.tags} />
+      <FormList title={'Tags'} value={articleData.tags} elementPlaceholder='Tag'/>
     </Form>
   );
 };

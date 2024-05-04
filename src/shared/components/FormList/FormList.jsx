@@ -9,7 +9,7 @@ import { inputActions } from './inputActions';
 import { withDispatch } from './withDispatch';
 import { useFormContext } from 'react-hook-form';
 
-const FormList = ({ title, value }) => {
+const FormList = ({ title, value, elementPlaceholder }) => {
   const mappedValue = value.map((value) => ({ value }));
   const tags = [...mappedValue];
   const lastTag = tags.pop()?.value ?? '';
@@ -60,6 +60,7 @@ const FormList = ({ title, value }) => {
         remove(inputs.length - 1);
       }}
       onChange={onLastInputChange}
+      placeholder={elementPlaceholder}
     />
   );
 
