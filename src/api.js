@@ -49,7 +49,7 @@ export const update = async (username, email, password, url) => {
         username,
         email,
         password,
-        image: url,
+        image: !url ? null : url,
       },
     },
     {

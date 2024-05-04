@@ -1,6 +1,10 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import styled from 'styled-components';
+import { withReactHookValidation } from '../../utils/validation';
+import { FormInputError } from '../FormInput/FormInputError';
+import { VStack } from '../../ui';
 
 const Label = styled.label`
   display: flex;
@@ -10,9 +14,9 @@ const Label = styled.label`
   width: 100%;
   background-color: white;
 
-  &:before {
+  &::before {
     position: relative;
-    content: url('/checkbox.svg');
+    content: url('/checkbox.svg');;
     width: 16px;
     height: 16px;
   }
@@ -33,12 +37,18 @@ const LabelTitle = styled.span`
   color: #4a4a4a;
 `;
 
-const Checkbox = ({name, checked = true}) => {
+const Checkbox = ({name, text, checked: propsChecked = true, validation}) => {
+  const {register, watch, formState: { errors },} = useFormContext()
+  const [checked, setChecked] = useState(propsChecked)
 	return (
-		<Label>
-			<CheckboxAtom checked={checked}/>
-			<LabelTitle>{name}</LabelTitle>
-      	</Label>
+		<VStack>
+		  <Label>
+  			<CheckboxAtom checked={checked} onClick={()=>{setChecked(val => !val)}} {...register(name, withReactHookValidation(watch, validation, name))}/>
+  			<LabelTitle>{text}</LabelTitle>
+       
+      </Label>
+      <FormInputError error={errors[name]}>{errors?.[name]?.message}</FormInputError>
+		</VStack>
 	);
 };
 

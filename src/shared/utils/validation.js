@@ -45,6 +45,7 @@ function isValidHttpUrl(string) {
 
 export const isUrl = (message) => ({
   dynamic: () => (val) => {
+    if(!val) return;
     if (!isValidHttpUrl(val)) return message;
   },
 });

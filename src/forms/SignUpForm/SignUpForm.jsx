@@ -18,7 +18,7 @@ const Sub = () => <CallToAction call="Already have an account? " action="Sign In
 const Sup = () => (
   <VStack $gap="8px">
     <Divider />
-    <Checkbox name={'I agree to the processing of my personal information'} />
+    <Checkbox name='piCheckbox' text={'I agree to the processing of my personal information'} validation={[required('Это поле обязательно')]} />
   </VStack>
 );
 

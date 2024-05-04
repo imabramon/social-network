@@ -44,12 +44,12 @@ const EditProfileForm = () => {
       <FormInput
         title={'New password'}
         variant={FormVariant.Password}
-        validation={[required('Это поле обязательное'), inRange(6, 40)('от 6 до 40')]}
+        validation={[inRange(6, 40)('от 6 до 40')]}
         autoComplete="new-password"
       />
       <FormInput
         title={'Avatar image (url)'}
-        validation={[isNotEmpty('Поле не должно быть пустым'), isUrl('Введите корректный url')]}
+        validation={[isUrl('Введите корректный url')]}
         value={url}
       />
     </Form>
