@@ -1,8 +1,9 @@
-'use client';
-import React from 'react';
-import styled from 'styled-components';
-import FormInput from '../FormInput/FormInput';
-import { useFormContext } from 'react-hook-form';
+'use client'
+
+import React from 'react'
+import styled from 'styled-components'
+import { useFormContext } from 'react-hook-form'
+import FormInput from '../FormInput/FormInput'
 
 const Textbox = styled.textarea`
   font-size: 16px;
@@ -19,11 +20,23 @@ const Textbox = styled.textarea`
   ::placeholder {
     color: #bfbfbf;
   }
-`;
+`
 
-const FormTextBox = ({ value, ...props }) => {
-  const { register } = useFormContext();
-  return <FormInput inputSlot={<Textbox defaultValue={value} rows={6} {...register(props.title)} placeholder={props.title} />} {...props} />;
-};
+function FormTextBox({ value, ...props }) {
+  const { register } = useFormContext()
+  return (
+    <FormInput
+      inputSlot={
+        <Textbox
+          defaultValue={value}
+          rows={6}
+          {...register(props.title)}
+          placeholder={props.title}
+        />
+      }
+      {...props}
+    />
+  )
+}
 
-export default FormTextBox;
+export default FormTextBox

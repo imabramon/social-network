@@ -12,4 +12,4 @@ export const PagePath = {
   userSignIn: '/sign-in',
   userSignUp: '/sign-up',
   userEdit: '/profile',
-};
+}

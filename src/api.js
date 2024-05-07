@@ -1,45 +1,41 @@
-import axios from 'axios';
-import { mapResponseToPosts } from './shared/utils/mapResponseToPosts';
+import axios from 'axios'
+import { mapResponseToPosts } from './shared/utils/mapResponseToPosts'
 
-let token = null;
+let token = null
 
 export const apiServise = axios.create({
   baseURL: 'https://blog.kata.academy/api/',
-});
+})
 
 export const login = async (email, password) => {
-  
-    const answer = await apiServise.post('/users/login', {
-      user: { email, password },
-    });
-    token = answer.data.user.token;
-    return answer.data.user;
- 
-};
+  const answer = await apiServise.post('/users/login', {
+    user: { email, password },
+  })
+  token = answer.data.user.token
+  return answer.data.user
+}
 
 export const getUserInfo = async () => {
-  
   const res = await apiServise.get('/user', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  });
+  })
 
-  return res.data.user;
-  
-};
+  return res.data.user
+}
 
 export const logout = () => {
-  token = null;
-};
+  token = null
+}
 
 export const register = async (username, email, password) => {
   const answer = await apiServise.post('/users', {
     user: { username, email, password },
-  });
-  token = answer.data.user.token;
-  return answer.data.user;
-};
+  })
+  token = answer.data.user.token
+  return answer.data.user
+}
 
 export const update = async (username, email, password, url) => {
   await apiServise.put(
@@ -57,12 +53,12 @@ export const update = async (username, email, password, url) => {
         Authorization: `Bearer ${token}`,
       },
     }
-  );
-};
+  )
+}
 
-const pageLength = 10;
+const pageLength = 10
 
-const getSkipCountFromLength = (page) => pageLength * (page - 1);
+const getSkipCountFromLength = (page) => pageLength * (page - 1)
 
 export const getArticles = async (page = 1) => {
   const {
@@ -72,62 +68,53 @@ export const getArticles = async (page = 1) => {
       limit: pageLength,
       offset: getSkipCountFromLength(page),
     },
-    headers: token ? {
-      Authorization: `Bearer ${token}`,
-    }: null
-  });
+    headers: token
+      ? {
+          Authorization: `Bearer ${token}`,
+        }
+      : null,
+  })
 
-  
-
-  return articles.map(mapResponseToPosts);
-};
+  return articles.map(mapResponseToPosts)
+}
 
 export const createArticle = async (title, description, body, tags) => {
-    const {
-      data: {
-        article: { slug },
-      },
-    } = await apiServise.post(
-      '/articles',
-      {
-        article: {
-          title,
-          description,
-          body,
-          tagList: tags.filter(el => el.trim() !== ''),
-        },
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    return slug;
-};
-
-export const loadArticle = async (id) => {
-  
   const {
     data: {
-      article,
+      article: { slug },
     },
-  } = await apiServise.get(
-    `/articles/${encodeURI(id)}`, 
+  } = await apiServise.post(
+    '/articles',
     {
-      headers: token ? {
+      article: {
+        title,
+        description,
+        body,
+        tagList: tags.filter((el) => el.trim() !== ''),
+      },
+    },
+    {
+      headers: {
         Authorization: `Bearer ${token}`,
-      }: null
+      },
     }
-  );
+  )
 
-  
+  return slug
+}
 
-  return mapResponseToPosts(article);
-  
-  
-  
+export const loadArticle = async (id) => {
+  const {
+    data: { article },
+  } = await apiServise.get(`/articles/${encodeURI(id)}`, {
+    headers: token
+      ? {
+          Authorization: `Bearer ${token}`,
+        }
+      : null,
+  })
+
+  return mapResponseToPosts(article)
 }
 
 export const editArticle = async (id, title, description, body, tags) => {
@@ -142,7 +129,7 @@ export const editArticle = async (id, title, description, body, tags) => {
         title,
         description,
         body,
-        tagList: tags.filter(el => el.trim() !== ''),
+        tagList: tags.filter((el) => el.trim() !== ''),
       },
     },
     {
@@ -150,49 +137,39 @@ export const editArticle = async (id, title, description, body, tags) => {
         Authorization: `Bearer ${token}`,
       },
     }
-  );
+  )
 
-  return slug;
-};
+  return slug
+}
 
 export const deleteArticleReq = async (id) => {
- 
-    const res = await apiServise.delete(
-    `/articles/${encodeURI(id)}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  )
-  return res
-
-} 
-
-export const markFavorite = async (id) => {
- 
-  const res = await apiServise.post(
-  `/articles/${encodeURI(id)}/favorite`, null, 
-  {
+  const res = await apiServise.delete(`/articles/${encodeURI(id)}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
-)
-return res
+  })
+  return res
+}
 
-} 
-
-export const markUnfavorite = async (id) => {
-  const res = await apiServise.delete(
+export const markFavorite = async (id) => {
+  const res = await apiServise.post(
     `/articles/${encodeURI(id)}/favorite`,
+    null,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
-    
   )
+  return res
+}
+
+export const markUnfavorite = async (id) => {
+  const res = await apiServise.delete(`/articles/${encodeURI(id)}/favorite`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
 
   return res
-} 
+}

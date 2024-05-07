@@ -1,1 +1,1 @@
-export { default, FormInputVariant } from './FormInput';
+export { default, FormInputVariant } from './FormInput'

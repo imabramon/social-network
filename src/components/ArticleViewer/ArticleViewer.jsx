@@ -1,41 +1,54 @@
-'use client';
-import React, {useState} from 'react';
-import styled from 'styled-components';
-import { Avatar, Container, HStack, Header, NameTitle, SubText, Tag, Text, VStack } from '../../shared/ui';
-import LikesIcon from '../../shared/components/LikesIcon';
-import { format } from 'date-fns';
-import Markdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import Button from '../../shared/components/Button/Button';
-import { useSelector } from 'react-redux';
-import Popup from 'reactjs-popup';
-import { useNavigate } from 'react-router';
-import { PagePath } from '../../consts/pagePath'; 
-import { deleteArticleReq, getUserInfo, markFavorite, markUnfavorite } from '../../api';
-import { componentFactory } from '../../shared/utils/componentFactory.jsx';
+'use client'
 
-//Alias for more understanding
-const PostHeader = HStack;
-const PostTitle = HStack;
-const PostInfo = VStack;
-const TagsContainer = HStack;
-const SideInfo = VStack;
-const UserInfo = HStack;
-const TextInfo = VStack;
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { format } from 'date-fns'
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import { useSelector } from 'react-redux'
+import Popup from 'reactjs-popup'
+import { useNavigate } from 'react-router'
+import Button from '../../shared/components/Button/Button'
+import LikesIcon from '../../shared/components/LikesIcon'
+import {
+  Avatar,
+  Container,
+  HStack,
+  Header,
+  NameTitle,
+  SubText,
+  Tag,
+  Text,
+  VStack,
+} from '../../shared/ui'
+import { PagePath } from '../../consts/pagePath'
+import {
+  deleteArticleReq,
+  getUserInfo,
+  markFavorite,
+  markUnfavorite,
+} from '../../api'
+import { componentFactory } from '../../shared/utils/componentFactory.jsx'
+
+// Alias for more understanding
+const PostHeader = HStack
+const PostTitle = HStack
+const PostInfo = VStack
+const TagsContainer = HStack
+const SideInfo = VStack
+const UserInfo = HStack
+const TextInfo = VStack
 const DateTitle = styled.span`
   font-size: 12px;
   line-height: 12px;
   color: rgba(0, 0, 0, 0.5);
-`;
-const EditButton = Button.Small.Highlighted.Action.Fit;
-const DeleteButton = Button.Small.Highlighted.Negative.Fit;
-const NoButton = Button.Small.Highlighted.Neutral.Fit;
-const YesButton = Button.Small.Filled.Info.Fit;
+`
+const EditButton = Button.Small.Highlighted.Action.Fit
+const DeleteButton = Button.Small.Highlighted.Negative.Fit
+const NoButton = Button.Small.Highlighted.Neutral.Fit
+const YesButton = Button.Small.Filled.Info.Fit
 
-
-const formatDate = (date) => {
-  return format(new Date(date), 'MMMM d, yyyy');
-};
+const formatDate = (date) => format(new Date(date), 'MMMM d, yyyy')
 
 const MarkdownWrapper = styled.div`
   & * {
@@ -53,7 +66,7 @@ const MarkdownWrapper = styled.div`
   & h2 {
     font-size: 18px;
   }
-`;
+`
 
 const PopUpContainer = styled.div`
   width: 238px;
@@ -62,7 +75,7 @@ const PopUpContainer = styled.div`
   transform: translateY(35px);
   padding: 16px 16px;
   padding-left: 42px;
-`;
+`
 
 const PopupText = styled.p`
   margin: 0;
@@ -80,10 +93,9 @@ const PopupText = styled.p`
     background: url('/icon-info.svg');
     transform: translateX(-18px);
   }
-`;
+`
 
-const PopUpConfirm = ({ onAccess, onClose }) => {
-  
+function PopUpConfirm({ onAccess, onClose }) {
   return (
     <PopUpContainer>
       <VStack $gap="12px">
@@ -94,59 +106,76 @@ const PopUpConfirm = ({ onAccess, onClose }) => {
         </HStack>
       </VStack>
     </PopUpContainer>
-  );
-};
+  )
+}
 
-const ArticleControl = ({ onDelete, onEdit }) => {
-
+function ArticleControl({ onDelete, onEdit }) {
   return (
     <HStack $gap="12px">
-      <Popup trigger={<DeleteButton>Delete</DeleteButton>} position="right center">
-        {(close) => {
-          return <PopUpConfirm onClose={close} onAccess={onDelete} />;
-        }}
+      <Popup
+        trigger={<DeleteButton>Delete</DeleteButton>}
+        position="right center"
+      >
+        {(close) => <PopUpConfirm onClose={close} onAccess={onDelete} />}
       </Popup>
       <EditButton onClick={onEdit}>Edit</EditButton>
     </HStack>
-  );
-};
+  )
+}
 
-const ArticleViewer = ({id, title, likes: propLikes, tags, description, userInfo: {name, avatarUrl }, date, text, isLiked }) => {
-  
+function ArticleViewer({
+  id,
+  title,
+  likes: propLikes,
+  tags,
+  description,
+  userInfo: { name, avatarUrl },
+  date,
+  text,
+  isLiked,
+}) {
   const navigate = useNavigate()
-  const loggedUserName = useSelector((state) => state.userData.username);
+  const loggedUserName = useSelector((state) => state.userData.username)
   const deleteArticle = async () => {
-      await deleteArticleReq(id)
-      navigate(PagePath.feed)
-    };
-  const editArticle = () => navigate(PagePath.editArticle.goTo(id));
-  const sideSlot = loggedUserName === name ? <ArticleControl onDelete={deleteArticle} onEdit={editArticle}  /> : null;
+    await deleteArticleReq(id)
+    navigate(PagePath.feed)
+  }
+  const editArticle = () => navigate(PagePath.editArticle.goTo(id))
+  const sideSlot =
+    loggedUserName === name ? (
+      <ArticleControl onDelete={deleteArticle} onEdit={editArticle} />
+    ) : null
   const [likes, setLikes] = useState(propLikes)
   const likeArticle = async () => {
-   
-      await markFavorite(id)
-      setLikes((val)=>val+1)
-      return true
-  
+    await markFavorite(id)
+    setLikes((val) => val + 1)
+    return true
   }
   const unlikeArticle = async () => {
-   
-      await markUnfavorite(id)
-      setLikes((val)=>val-1)
-      return true
-    
+    await markUnfavorite(id)
+    setLikes((val) => val - 1)
+    return true
   }
 
-  const isTitleOverflow = title.length > 61;
+  const isTitleOverflow = title.length > 61
 
   return (
-    <Container $paddingvertical="16px" $paddinghorizontal="16px" height="fit-content">
+    <Container
+      $paddingvertical="16px"
+      $paddinghorizontal="16px"
+      height="fit-content"
+    >
       <VStack $gap="25px">
         <PostHeader $justifyContent="space-between">
-          <PostInfo width="682px" $gap="4px"> 
+          <PostInfo width="682px" $gap="4px">
             <PostTitle height="fit-content" $gap="13px">
-                <Header>{title}</Header>
-                          <LikesIcon value={likes} onLike={likeArticle} onUnlike={unlikeArticle} isLiked={isLiked}/>
+              <Header>{title}</Header>
+              <LikesIcon
+                value={likes}
+                onLike={likeArticle}
+                onUnlike={unlikeArticle}
+                isLiked={isLiked}
+              />
             </PostTitle>
             <TagsContainer height="fit-content" $gap="8px">
               {componentFactory(tags, Tag)}
@@ -154,14 +183,14 @@ const ArticleViewer = ({id, title, likes: propLikes, tags, description, userInfo
             <Text>{description}</Text>
           </PostInfo>
           <SideInfo width="147px" $gap="30px">
-              <UserInfo  $justifyContent="flex-end" $gap="12px">
-                <TextInfo $alignItem="flex-end" width="147px">
-                  <NameTitle>{name}</NameTitle>
-                  <DateTitle>{formatDate(date)}</DateTitle>
-                </TextInfo>
-                <Avatar src={avatarUrl} size="" />
+            <UserInfo $justifyContent="flex-end" $gap="12px">
+              <TextInfo $alignItem="flex-end" width="147px">
+                <NameTitle>{name}</NameTitle>
+                <DateTitle>{formatDate(date)}</DateTitle>
+              </TextInfo>
+              <Avatar src={avatarUrl} size="" />
             </UserInfo>
-              {sideSlot}
+            {sideSlot}
           </SideInfo>
         </PostHeader>
         <MarkdownWrapper>
@@ -169,8 +198,8 @@ const ArticleViewer = ({id, title, likes: propLikes, tags, description, userInfo
         </MarkdownWrapper>
       </VStack>
     </Container>
-  );
-};
+  )
+}
 
 // ArticleViewer.defaultProps = {
 //   title: 'Some article title',
@@ -191,8 +220,8 @@ const ArticleViewer = ({id, title, likes: propLikes, tags, description, userInfo
 
 // ## h2 title
 // - list 1
-// - list 2 
+// - list 2
 //   `,
 // };
 
-export default ArticleViewer;
+export default ArticleViewer

@@ -1,1 +1,1 @@
-export { default } from './ViewArticlePage';
+export { default } from './ViewArticlePage'

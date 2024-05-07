@@ -1,8 +1,8 @@
-import React from 'react';
-import './ContentMayOverflow.scss';
+import React from 'react'
+import './ContentMayOverflow.scss'
 
 export default function ContentMayOverflow({ isOverflow, children }) {
-  if (!isOverflow) return <>{children}</>;
+  if (!isOverflow) return <>{children}</>
 
   return (
     <div className="content-may-overflow">
@@ -11,5 +11,5 @@ export default function ContentMayOverflow({ isOverflow, children }) {
         <div className="content-may-overflow__child">{children}</div>
       </div>
     </div>
-  );
+  )
 }

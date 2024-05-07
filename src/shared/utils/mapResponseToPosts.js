@@ -7,5 +7,5 @@ export const mapResponseToPosts = (data) => ({
   userInfo: { name: data.author.username, avatarUrl: data.author.image },
   date: data.createdAt,
   text: data.body,
-  isLiked: data.favorited
-});
+  isLiked: data.favorited,
+})

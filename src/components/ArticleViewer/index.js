@@ -1,1 +1,1 @@
-export { default } from './ArticleViewer';
+export { default } from './ArticleViewer'

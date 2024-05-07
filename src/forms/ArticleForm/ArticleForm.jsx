@@ -1,14 +1,15 @@
-'use client';
-import React from 'react';
-import FormTextBox from '../../shared/components/FormTextBox';
-import Form from '../../shared/components/Form';
-import FormInput from '../../shared/components/FormInput';
-import FormList from '../../shared/components/FormList';
-import Button from '../../shared/components/Button';
+'use client'
 
-const submitButton = Button.Normal.Filled.Info.Fit;
+import React from 'react'
+import FormTextBox from '../../shared/components/FormTextBox'
+import Form from '../../shared/components/Form'
+import FormInput from '../../shared/components/FormInput'
+import FormList from '../../shared/components/FormList'
+import Button from '../../shared/components/Button'
 
-const ArticleForm = ({ title, sumbitText, articleData, onSubmit }) => {
+const submitButton = Button.Normal.Filled.Info.Fit
+
+function ArticleForm({ title, sumbitText, articleData, onSubmit }) {
   return (
     <Form
       title={title}
@@ -17,13 +18,17 @@ const ArticleForm = ({ title, sumbitText, articleData, onSubmit }) => {
       submitButtonProps={{ width: '319px' }}
       onSubmit={onSubmit}
     >
-      <FormInput title={'Title'} value={articleData.title} />
-      <FormInput title={'Short description'} value={articleData.description} />
-      <FormTextBox title={'Text'} value={articleData.text} />
-      <FormList title={'Tags'} value={articleData.tags} elementPlaceholder='Tag'/>
+      <FormInput title="Title" value={articleData.title} />
+      <FormInput title="Short description" value={articleData.description} />
+      <FormTextBox title="Text" value={articleData.text} />
+      <FormList
+        title="Tags"
+        value={articleData.tags}
+        elementPlaceholder="Tag"
+      />
     </Form>
-  );
-};
+  )
+}
 
 ArticleForm.defaultProps = {
   articleData: {
@@ -32,6 +37,6 @@ ArticleForm.defaultProps = {
     text: '',
     tags: [],
   },
-};
+}
 
-export default ArticleForm;
+export default ArticleForm

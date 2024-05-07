@@ -1,15 +1,12 @@
-"use client";
-import React from 'react';
-import styled from 'styled-components';
+'use client'
 
-const Popup = ({}) => {
-	return (
-		<PopupStl>
- 			Popup works!
- 		</PopupStl>
-	);
-};
+import React from 'react'
+import styled from 'styled-components'
 
-export const PopupStl = styled.div``;
+function Popup({}) {
+  return <PopupStl>Popup works!</PopupStl>
+}
 
-export default Popup;
+export const PopupStl = styled.div``
+
+export default Popup

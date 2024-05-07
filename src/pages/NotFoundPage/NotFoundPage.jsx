@@ -1,15 +1,12 @@
-"use client";
-import React from 'react';
-import styled from 'styled-components';
+'use client'
 
-const NotFoundPage = ({}) => {
-	return (
-		<NotFoundPageStl>
- 			NotFoundPage works!
- 		</NotFoundPageStl>
-	);
-};
+import React from 'react'
+import styled from 'styled-components'
 
-export const NotFoundPageStl = styled.div``;
+function NotFoundPage({}) {
+  return <NotFoundPageStl>NotFoundPage works!</NotFoundPageStl>
+}
 
-export default NotFoundPage;
+export const NotFoundPageStl = styled.div``
+
+export default NotFoundPage

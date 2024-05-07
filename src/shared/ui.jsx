@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
-import { Link as RouterLink } from 'react-router-dom';
+import styled, { css } from 'styled-components'
+import { Link as RouterLink } from 'react-router-dom'
 
-import { withProps } from './utils/withProps';
+import { withProps } from './utils/withProps'
 
 export const Header = styled.h2`
   display: inline-block;
@@ -15,7 +15,7 @@ export const Header = styled.h2`
   clear: both;
   overflow: hidden;
   white-space: nowrap;
-`;
+`
 
 export const NameTitle = styled.span`
   font-weight: 400;
@@ -23,7 +23,7 @@ export const NameTitle = styled.span`
   line-height: 28px;
   text-align: right;
   width: ${withProps('width', 'unset')};
-`;
+`
 
 export const Tag = styled.span`
   display: inline-block;
@@ -36,7 +36,7 @@ export const Tag = styled.span`
   font-size: 12px;
   padding-left: 4px;
   padding-right: 4px;
-`;
+`
 
 export const VStack = styled.div`
   display: flex;
@@ -46,7 +46,7 @@ export const VStack = styled.div`
   gap: ${withProps('$gap', 0)};
   justify-content: ${withProps('$justifyContent', 'unset')};
   align-items: ${withProps('$alignItems', 'unset')};
-`;
+`
 
 export const HStack = styled.div`
   display: flex;
@@ -56,14 +56,14 @@ export const HStack = styled.div`
   justify-content: ${withProps('$justifyContent', 'unset')};
   align-items: ${withProps('$alignItems', 'unset')};
   align-self: ${withProps('$alignSelf', 'unset')};
-`;
+`
 
 export const Text = styled.p`
   margin: 0;
   line-height: 12px;
   font-weight: 400px;
   font-size: 12px;
-`;
+`
 
 export const Avatar = styled.img`
   width: 46px;
@@ -71,14 +71,14 @@ export const Avatar = styled.img`
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
-`;
+`
 
 export const Input = styled.input`
   font-size: 16px;
   font-weight: normal;
   line-height: 24px;
   background-color: white;
-  border: 1px solid ;
+  border: 1px solid;
   border-color: ${withProps('$borderColor', '#d9d9d9')};
   border-radius: 4px;
   padding: 8px 12px;
@@ -88,7 +88,7 @@ export const Input = styled.input`
   ::placeholder {
     color: #bfbfbf;
   }
-`;
+`
 
 export const Label = styled.label`
   display: flex;
@@ -98,13 +98,13 @@ export const Label = styled.label`
   padding: 0px;
   align-items: flex-start;
   width: 100%;
-`;
+`
 
 export const InputTitle = styled.span`
   font-size: 14px;
   line-height: 22px;
   color: #262626;
-`;
+`
 
 export const FormTitle = styled.h2`
   color: #262626;
@@ -115,7 +115,7 @@ export const FormTitle = styled.h2`
   text-align: center;
   padding: 0;
   margin: 0;
-`;
+`
 
 export const Container = styled.div`
   background-color: white;
@@ -133,7 +133,7 @@ export const Container = styled.div`
   padding: var(--padding-vertical) var(--padding-horizontal);
   width: ${withProps('width', '100%')};
   height: ${withProps('height', '100%')};
-`;
+`
 
 export const Background = styled.div`
   background-color: #ebeef3;
@@ -142,30 +142,30 @@ export const Background = styled.div`
   justify-items: center;
   flex-direction: column;
   min-height: 100%;
-`;
+`
 
-export const ProxyForm = styled.form``;
+export const ProxyForm = styled.form``
 
 export const Link = styled(RouterLink)`
   text-decoration: none;
   color: #1890ff;
-`;
+`
 
 export const Paragraph = styled.p`
   text-align: center;
   margin: 0;
   font-size: ${withProps('fontSize', 'inherit')};
-`;
+`
 
 export const SubText = styled.span`
   color: #8c8c8c;
-`;
+`
 
 export const Divider = styled.div`
   width: 100%;
   height: 1px;
   background-color: #e8e8e8;
-`;
+`
 
 export const visuallyHidden = css`
   position: absolute;
@@ -178,8 +178,8 @@ export const visuallyHidden = css`
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
-`;
+`
 
 export const HiddenSpan = styled.span`
   ${visuallyHidden}
-`;
+`

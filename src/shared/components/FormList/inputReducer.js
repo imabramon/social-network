@@ -1,37 +1,38 @@
-import { InputActionsType } from './inputActions';
+import { InputActionsType } from './inputActions'
 
 export const inputsReducer = (state = [], action) => {
-  const { type, payload } = action;
+  const { type, payload } = action
   switch (type) {
     case InputActionsType.add: {
-      const { value } = payload;
+      const { value } = payload
 
-      return [...state, { value }];
+      return [...state, { value }]
     }
 
-    case InputActionsType.remove:
-      const { index } = payload;
+    case InputActionsType.remove: {
+      const { index } = payload
       const newState = state.reduce((arr, elem, elemIndex) => {
         if (elemIndex === index) {
-          return [...arr];
+          return [...arr]
         }
 
-        return [...arr, elem];
-      }, []);
+        return [...arr, elem]
+      }, [])
+      return newState
+    }
 
-      return newState;
     case InputActionsType.change: {
-      const { index, value } = payload;
+      const { index, value } = payload
       const newState = state.reduce((arr, elem, elemIndex) => {
         if (elemIndex === index) {
-          return [...arr, { value }];
+          return [...arr, { value }]
         }
 
-        return [...arr, elem];
-      }, []);
-      return newState;
+        return [...arr, elem]
+      }, [])
+      return newState
     }
     default:
-      return state;
+      return state
   }
-};
+}

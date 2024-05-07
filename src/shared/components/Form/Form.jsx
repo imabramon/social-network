@@ -1,16 +1,17 @@
-'use client';
-import React from 'react';
-import styled from 'styled-components';
-import { Container, FormTitle, ProxyForm, VStack } from '../../ui';
-import Button from '../Button';
-import { FormProvider, useForm } from 'react-hook-form';
+'use client'
 
-const mapKeysToTitle ={
+import React from 'react'
+import styled from 'styled-components'
+import { FormProvider, useForm } from 'react-hook-form'
+import { Container, FormTitle, ProxyForm, VStack } from '../../ui'
+import Button from '../Button'
+
+const mapKeysToTitle = {
   username: 'Username',
-  email: 'Email address'
+  email: 'Email address',
 }
 
-const Form = ({
+function Form({
   children,
   formProps,
   sumbitText,
@@ -20,26 +21,36 @@ const Form = ({
   submitButton,
   submitButtonProps,
   onSubmit: submitHandler,
-}) => {
-  const SubmitButton = submitButton;
-  const methods = useForm();
-  const { handleSubmit, setError } = methods;
+}) {
+  const SubmitButton = submitButton
+  const methods = useForm()
+  const { handleSubmit, setError } = methods
   return (
     <Container $paddingvertical="48px" $paddinghorizontal="32px">
       <FormProvider {...methods}>
-        <ProxyForm {...formProps} onSubmit={handleSubmit(async (...args)=>{
-          try{
-            console.log('try')
-            await submitHandler(...args)
-          }catch(e){
-            console.log('catch')
-            const {response: {data:{ errors}}} = e
-            for(const [field, errorMessege] of Object.entries(errors)){
-              console.log(field, errorMessege)
-              setError(mapKeysToTitle[field], {type: 'custom', message: errorMessege})
+        <ProxyForm
+          {...formProps}
+          onSubmit={handleSubmit(async (...args) => {
+            try {
+              console.log('try')
+              await submitHandler(...args)
+            } catch (e) {
+              console.log('catch')
+              const {
+                response: {
+                  data: { errors },
+                },
+              } = e
+              for (const [field, errorMessege] of Object.entries(errors)) {
+                console.log(field, errorMessege)
+                setError(mapKeysToTitle[field], {
+                  type: 'custom',
+                  message: errorMessege,
+                })
+              }
             }
-          }
-        })}>
+          })}
+        >
           <VStack $gap="21px">
             <FormTitle>{title}</FormTitle>
             <VStack $gap="12px">{children}</VStack>
@@ -52,8 +63,8 @@ const Form = ({
         </ProxyForm>
       </FormProvider>
     </Container>
-  );
-};
+  )
+}
 
 Form.defaultProps = {
   children: [],
@@ -64,8 +75,8 @@ Form.defaultProps = {
   sub: null,
   sup: null,
   submitButton: Button.Normal.Filled.Info.Wide,
-};
+}
 
-export const FormStl = styled.div``;
+export const FormStl = styled.div``
 
-export default Form;
+export default Form

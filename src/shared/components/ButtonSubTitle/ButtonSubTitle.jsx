@@ -1,15 +1,12 @@
-"use client";
-import React from 'react';
-import styled from 'styled-components';
+'use client'
 
-const ButtonSubTitle = ({}) => {
-	return (
-		<ButtonSubTitleStl>
- 			ButtonSubTitle works!
- 		</ButtonSubTitleStl>
-	);
-};
+import React from 'react'
+import styled from 'styled-components'
 
-export const ButtonSubTitleStl = styled.div``;
+function ButtonSubTitle({}) {
+  return <ButtonSubTitleStl>ButtonSubTitle works!</ButtonSubTitleStl>
+}
 
-export default ButtonSubTitle;
+export const ButtonSubTitleStl = styled.div``
+
+export default ButtonSubTitle

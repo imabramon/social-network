@@ -1,17 +1,27 @@
-'use client';
-import React from 'react';
-import { Input, InputTitle, Label } from '../../ui';
-import { useFormContext } from 'react-hook-form';
-import { FormInputError } from './FormInputError';
-import { withReactHookValidation } from '../../utils/validation';
-import { css } from 'styled-components';
+'use client'
 
-const FormInput = ({ title, inputProps, titleProps, variant = {}, inputSlot, validation, value, autoComplete }) => {
+import React from 'react'
+import { useFormContext } from 'react-hook-form'
+import { css } from 'styled-components'
+import { Input, InputTitle, Label } from '../../ui'
+import { FormInputError } from './FormInputError'
+import { withReactHookValidation } from '../../utils/validation'
+
+function FormInput({
+  title,
+  inputProps,
+  titleProps,
+  variant = {},
+  inputSlot,
+  validation,
+  value,
+  autoComplete,
+}) {
   const {
     register,
     formState: { errors },
     watch,
-  } = useFormContext();
+  } = useFormContext()
   console.log(errors)
 
   return (
@@ -19,23 +29,26 @@ const FormInput = ({ title, inputProps, titleProps, variant = {}, inputSlot, val
       <InputTitle {...variant.titleProps} {...titleProps}>
         {title}
       </InputTitle>
-      {inputSlot ? (
-        inputSlot
-      ) : (
+      {inputSlot || (
         <Input
           {...variant.inputProps}
           {...inputProps}
-          {...register(title, withReactHookValidation(watch, validation, title))}
+          {...register(
+            title,
+            withReactHookValidation(watch, validation, title)
+          )}
           autoComplete={autoComplete}
           defaultValue={value}
           placeholder={title}
-          $borderColor={errors[title] ? '#f5222d': 'no-change'}
+          $borderColor={errors[title] ? '#f5222d' : 'no-change'}
         />
       )}
-      <FormInputError error={errors[title]}>{errors?.[title]?.message}</FormInputError>
+      <FormInputError error={errors[title]}>
+        {errors?.[title]?.message}
+      </FormInputError>
     </Label>
-  );
-};
+  )
+}
 
 FormInput.defaultProps = {
   inputSlot: undefined,
@@ -46,7 +59,7 @@ FormInput.defaultProps = {
     dinamycValidate: () => ({}),
   },
   dinamycValidateConfig: {},
-};
+}
 
 export const FormInputVariant = {
   Password: {
@@ -54,6 +67,6 @@ export const FormInputVariant = {
       type: 'password',
     },
   },
-};
+}
 
-export default FormInput;
+export default FormInput

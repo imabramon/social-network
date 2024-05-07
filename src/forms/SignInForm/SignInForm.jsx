@@ -1,40 +1,51 @@
-'use client';
-import React from 'react';
+'use client'
 
-import Form from '../../shared/components/Form';
-import FormInput, { FormInputVariant } from '../../shared/components/FormInput';
-import CallToAction from '../../shared/components/CallToAction';
+import React from 'react'
 
-import { required, isNotEmpty, isEmail } from '../../shared/utils/validation';
-import { useDispatch } from 'react-redux';
-import { getUserInfo, login } from '../../api';
-import { useFormContext } from 'react-hook-form';
-import { loginUser } from '../../store/actions';
-import { useNavigate } from 'react-router';
-import { PagePath } from '../../consts/pagePath';
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
+import Form from '../../shared/components/Form'
+import FormInput, { FormInputVariant } from '../../shared/components/FormInput'
+import CallToAction from '../../shared/components/CallToAction'
 
-const Sub = () => <CallToAction call="Don’t have an account? " action="Sign Up" to={PagePath.userSignUp}/>;
+import { required, isNotEmpty, isEmail } from '../../shared/utils/validation'
+import { getUserInfo, login } from '../../api'
+import { loginUser } from '../../store/actions'
+import { PagePath } from '../../consts/pagePath'
 
-const SignInForm = ({}) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+function Sub() {
+  return (
+    <CallToAction
+      call="Don’t have an account? "
+      action="Sign Up"
+      to={PagePath.userSignUp}
+    />
+  )
+}
+
+function SignInForm() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   return (
     <Form
       sub={<Sub />}
-      title={'Sign In'}
-      sumbitText={'Login'}
+      title="Sign In"
+      sumbitText="Login"
       onSubmit={async (values) => {
-        const { Email: email, Password: password } = values;
-        
-          const { username, image = 'https://static.productionready.io/images/smiley-cyrus.jpg' } = await login(email, password);
-          const res = await getUserInfo();
-          dispatch(loginUser({ username, email, image }));
-          navigate(PagePath.feed);
-        
+        const { Email: email, Password: password } = values
+
+        const {
+          username,
+          image = 'https://static.productionready.io/images/smiley-cyrus.jpg',
+        } = await login(email, password)
+
+        await getUserInfo()
+        dispatch(loginUser({ username, email, image }))
+        navigate(PagePath.feed)
       }}
     >
       <FormInput
-        title={'Email'}
+        title="Email"
         required
         validation={[
           required('Это поле обязательное'),
@@ -43,12 +54,15 @@ const SignInForm = ({}) => {
         ]}
       />
       <FormInput
-        title={'Password'}
+        title="Password"
         variant={FormInputVariant.Password}
-        validation={[required('Это поле обязательное'), isNotEmpty('Полне не должно быть пустым')]}
+        validation={[
+          required('Это поле обязательное'),
+          isNotEmpty('Полне не должно быть пустым'),
+        ]}
       />
     </Form>
-  );
-};
+  )
+}
 
-export default SignInForm;
+export default SignInForm

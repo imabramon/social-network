@@ -1,15 +1,12 @@
-"use client";
-import React from 'react';
-import styled from 'styled-components';
+'use client'
 
-const EditArticleForm = ({}) => {
-	return (
-		<EditArticleFormStl>
- 			EditArticleForm works!
- 		</EditArticleFormStl>
-	);
-};
+import React from 'react'
+import styled from 'styled-components'
 
-export const EditArticleFormStl = styled.div``;
+function EditArticleForm({}) {
+  return <EditArticleFormStl>EditArticleForm works!</EditArticleFormStl>
+}
 
-export default EditArticleForm;
+export const EditArticleFormStl = styled.div``
+
+export default EditArticleForm

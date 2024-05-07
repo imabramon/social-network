@@ -1,1 +1,1 @@
-export { default } from './ContentMayOverflow';
+export { default } from './ContentMayOverflow'

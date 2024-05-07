@@ -1,15 +1,12 @@
-"use client";
-import React from 'react';
-import styled from 'styled-components';
+'use client'
 
-const Pagination = ({}) => {
-	return (
-		<PaginationStl>
- 			Pagination works!
- 		</PaginationStl>
-	);
-};
+import React from 'react'
+import styled from 'styled-components'
 
-export const PaginationStl = styled.div``;
+function Pagination({}) {
+  return <PaginationStl>Pagination works!</PaginationStl>
+}
 
-export default Pagination;
+export const PaginationStl = styled.div``
+
+export default Pagination

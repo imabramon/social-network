@@ -1,1 +1,1 @@
-export { default } from './LikesIcon';
+export { default } from './LikesIcon'

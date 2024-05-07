@@ -1,64 +1,87 @@
-'use client';
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Avatar, Container, HStack, Header, NameTitle, SubText, Tag, Text, VStack } from '../../shared/ui';
-import LikesIcon from '../../shared/components/LikesIcon';
-import { format } from 'date-fns';
-import { useNavigate } from 'react-router';
-import { PagePath } from '../../consts/pagePath';
-import { componentFactory } from '../../shared/utils/componentFactory.jsx';
-import ContentMayOverflow from '../../shared/components/ContentMayOverflow';
-import { markFavorite, markUnfavorite } from '../../api.js';
+'use client'
 
-//Alias for more understanding
-const PostTitle = HStack;
-const PostInfo = VStack;
-const TagsContainer = HStack;
-const SideInfo = HStack;
-const TextInfo = VStack;
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { format } from 'date-fns'
+import { useNavigate } from 'react-router'
+import {
+  Avatar,
+  Container,
+  HStack,
+  Header,
+  NameTitle,
+  SubText,
+  Tag,
+  Text,
+  VStack,
+} from '../../shared/ui'
+import LikesIcon from '../../shared/components/LikesIcon'
+import { PagePath } from '../../consts/pagePath'
+import { componentFactory } from '../../shared/utils/componentFactory.jsx'
+import ContentMayOverflow from '../../shared/components/ContentMayOverflow'
+import { markFavorite, markUnfavorite } from '../../api.js'
+
+// Alias for more understanding
+const PostTitle = HStack
+const PostInfo = VStack
+const TagsContainer = HStack
+const SideInfo = HStack
+const TextInfo = VStack
 const DateTitle = styled.span`
   font-size: 12px;
   line-height: 12px;
   color: rgba(0, 0, 0, 0.5);
   text-align: right;
-`;
+`
 
-const formatDate = (date) => {
-  return format(new Date(date), 'MMMM d, yyyy');
-};
+const formatDate = (date) => format(new Date(date), 'MMMM d, yyyy')
 
-const PostCard = ({ id, title, likes: propLikes, tags, description, userInfo: { name, avatarUrl }, date, isLiked }) => {
-  const navigate = useNavigate();
-  const goToArticle = () => navigate(PagePath.article.goTo(id));
+function PostCard({
+  id,
+  title,
+  likes: propLikes,
+  tags,
+  description,
+  userInfo: { name, avatarUrl },
+  date,
+  isLiked,
+}) {
+  const navigate = useNavigate()
+  const goToArticle = () => navigate(PagePath.article.goTo(id))
   const [likes, setLikes] = useState(propLikes)
   const likeArticle = async () => {
-    
-      await markFavorite(id)
-      setLikes((val)=>val+1)
-      return true
-    
+    await markFavorite(id)
+    setLikes((val) => val + 1)
+    return true
   }
   const unlikeArticle = async () => {
-    
-      await markUnfavorite(id)
-      setLikes((val)=>val-1)
-      return true
-    
+    await markUnfavorite(id)
+    setLikes((val) => val - 1)
+    return true
   }
 
-  const isTitleOverflow = title.length > 61;
+  const isTitleOverflow = title.length > 61
 
   return (
     <Container $paddingvertical="16px" $paddinghorizontal="16px" height="140px">
       <HStack $justifyContent="space-between">
-        <PostInfo width="682px" $gap="4px"> 
-          <PostTitle height='28px' width={isTitleOverflow ? '610px' : 'fit-content'} $gap="13px" >
-            <ContentMayOverflow isOverflow={isTitleOverflow} >
-              <Header onClick={goToArticle} width='fit-content'>
+        <PostInfo width="682px" $gap="4px">
+          <PostTitle
+            height="28px"
+            width={isTitleOverflow ? '610px' : 'fit-content'}
+            $gap="13px"
+          >
+            <ContentMayOverflow isOverflow={isTitleOverflow}>
+              <Header onClick={goToArticle} width="fit-content">
                 {title}
               </Header>
             </ContentMayOverflow>
-            <LikesIcon value={likes} onLike={likeArticle} onUnlike={unlikeArticle} isLiked={isLiked}/>
+            <LikesIcon
+              value={likes}
+              onLike={likeArticle}
+              onUnlike={unlikeArticle}
+              isLiked={isLiked}
+            />
           </PostTitle>
           <TagsContainer height="fit-content" $gap="8px">
             {tags ? componentFactory(tags, Tag) : null}
@@ -74,8 +97,8 @@ const PostCard = ({ id, title, likes: propLikes, tags, description, userInfo: { 
         </SideInfo>
       </HStack>
     </Container>
-  );
-};
+  )
+}
 
 // PostCard.defaultProps = {
 //   title: 'Some article title',
@@ -90,4 +113,4 @@ const PostCard = ({ id, title, likes: propLikes, tags, description, userInfo: { 
 //   date: '2020-03-05',
 // };
 
-export default PostCard;
+export default PostCard

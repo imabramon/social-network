@@ -2,7 +2,7 @@ export const InputActionsType = {
   add: 'add',
   remove: 'remove',
   change: 'change',
-};
+}
 
 export const inputActions = {
   add: (value = '') => ({
@@ -17,4 +17,4 @@ export const inputActions = {
     type: InputActionsType.change,
     payload: { index, value },
   }),
-};
+}

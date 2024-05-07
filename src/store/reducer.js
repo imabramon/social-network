@@ -1,4 +1,4 @@
-import { ActionTypes } from './actionTypes';
+import { ActionTypes } from './actionTypes'
 
 const initialState = {
   logged: false,
@@ -7,22 +7,26 @@ const initialState = {
     image: '',
     email: '',
   },
-};
+}
 
-export const reducer = (state = initialState, action) => {
-  const { type } = action;
+export const reducer = (state = initialState, action = {}) => {
+  const { type } = action
   switch (type) {
     case ActionTypes.Login: {
-      const { userData } = state;
-      return { ...state, logged: true, userData: { ...userData, ...action.payload } };
+      const { userData } = state
+      return {
+        ...state,
+        logged: true,
+        userData: { ...userData, ...action.payload },
+      }
     }
     case ActionTypes.Logout: {
-      return { ...state, logged: false, userData: {} };
+      return { ...state, logged: false, userData: {} }
     }
     case ActionTypes.Update: {
-      return { ...state, userData: action.payload };
+      return { ...state, userData: action.payload }
     }
     default:
-      return state;
+      return state
   }
-};
+}
