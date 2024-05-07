@@ -50,5 +50,6 @@ export const FeedPageStl = styled.div`
   width: 938px;
   height: fit-content;
   margin-top: 30px;
+  margin-bottom: 20px;
 `;
 export default FeedPage;

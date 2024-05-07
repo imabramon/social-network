@@ -12,6 +12,7 @@ import Header from './Header';
 import { Background } from '../shared/ui';
 import { PagePath } from '../consts/pagePath';
 import ErrorBoundary from './ErrorBoundary';
+import ScrollToTop from '../shared/components/ScrollToTop';
 
 const GlobalStyle = createGlobalStyle`
   :root{
@@ -38,6 +39,7 @@ function App() {
     <>
       <GlobalStyle />
       <BrowserRouter>
+        <ScrollToTop />
         <Header />
         <Background>
           <ErrorBoundary>

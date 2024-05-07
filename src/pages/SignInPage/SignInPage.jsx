@@ -14,6 +14,7 @@ const SignInPage = ({}) => {
 export const SignInPageStl = styled.div`
   width: 384px;
   height: fit-content;
+  margin-top: 30px;
 `;
 
 export default SignInPage;

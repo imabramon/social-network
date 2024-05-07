@@ -12,6 +12,7 @@ import Popup from 'reactjs-popup';
 import { useNavigate } from 'react-router';
 import { PagePath } from '../../consts/pagePath'; 
 import { deleteArticleReq, getUserInfo, markFavorite, markUnfavorite } from '../../api';
+import { componentFactory } from '../../shared/utils/componentFactory.jsx';
 
 //Alias for more understanding
 const PostHeader = HStack;
@@ -31,16 +32,6 @@ const DeleteButton = Button.Small.Highlighted.Negative.Fit;
 const NoButton = Button.Small.Highlighted.Neutral.Fit;
 const YesButton = Button.Small.Filled.Info.Fit;
 
-const componentFactory = (data, ComponentBasic) =>
-  data.map((item, index) => {
-    const { key = index, id, ...restItem } = item;
-    switch (true) {
-      case typeof item === 'object':
-        return <ComponentBasic key={id ?? key} {...restItem} />;
-      default:
-        return <ComponentBasic key={id ?? key}>{item}</ComponentBasic>;
-    }
-  });
 
 const formatDate = (date) => {
   return format(new Date(date), 'MMMM d, yyyy');
@@ -52,6 +43,7 @@ const MarkdownWrapper = styled.div`
     color: rgba(0, 0, 0, 0.75);
     line-height: 28px;
     font-size: 14px;
+    white-space: 'pre-wrap';
   }
 
   & h1 {
@@ -145,29 +137,31 @@ const ArticleViewer = ({id, title, likes: propLikes, tags, description, userInfo
     
   }
 
+  const isTitleOverflow = title.length > 61;
+
   return (
     <Container $paddingvertical="16px" $paddinghorizontal="16px" height="fit-content">
       <VStack $gap="25px">
         <PostHeader $justifyContent="space-between">
-          <PostInfo width="682px" $gap="4px">
+          <PostInfo width="682px" $gap="4px"> 
             <PostTitle height="fit-content" $gap="13px">
-              <Header>{title}</Header>
-              <LikesIcon value={likes} onLike={likeArticle} onUnlike={unlikeArticle} isLiked={isLiked}/>
+                <Header>{title}</Header>
+                          <LikesIcon value={likes} onLike={likeArticle} onUnlike={unlikeArticle} isLiked={isLiked}/>
             </PostTitle>
             <TagsContainer height="fit-content" $gap="8px">
               {componentFactory(tags, Tag)}
             </TagsContainer>
             <Text>{description}</Text>
           </PostInfo>
-          <SideInfo width="141px" $gap="30px">
-            <UserInfo>
-              <TextInfo>
-                <NameTitle>{name}</NameTitle>
-                <DateTitle>{formatDate(date)}</DateTitle>
-              </TextInfo>
-              <Avatar src={avatarUrl} size="" />
+          <SideInfo width="147px" $gap="30px">
+              <UserInfo  $justifyContent="flex-end" $gap="12px">
+                <TextInfo $alignItem="flex-end" width="147px">
+                  <NameTitle>{name}</NameTitle>
+                  <DateTitle>{formatDate(date)}</DateTitle>
+                </TextInfo>
+                <Avatar src={avatarUrl} size="" />
             </UserInfo>
-            {sideSlot}
+              {sideSlot}
           </SideInfo>
         </PostHeader>
         <MarkdownWrapper>

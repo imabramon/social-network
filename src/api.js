@@ -77,6 +77,8 @@ export const getArticles = async (page = 1) => {
     }: null
   });
 
+  
+
   return articles.map(mapResponseToPosts);
 };
 
@@ -92,7 +94,7 @@ export const createArticle = async (title, description, body, tags) => {
           title,
           description,
           body,
-          tagList: tags,
+          tagList: tags.filter(el => el.trim() !== ''),
         },
       },
       {
@@ -120,6 +122,8 @@ export const loadArticle = async (id) => {
     }
   );
 
+  
+
   return mapResponseToPosts(article);
   
   
@@ -138,7 +142,7 @@ export const editArticle = async (id, title, description, body, tags) => {
         title,
         description,
         body,
-        tagList: tags,
+        tagList: tags.filter(el => el.trim() !== ''),
       },
     },
     {

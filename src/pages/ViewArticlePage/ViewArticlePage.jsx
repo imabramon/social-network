@@ -29,6 +29,9 @@ const ViewArticlePage = ({}) => {
   );
 };
 
-export const ViewArticlePageStl = styled.div``;
+export const ViewArticlePageStl = styled.div`
+  margin-top: 25px;
+  margin-bottom: 65px;
+`;
 
 export default ViewArticlePage;

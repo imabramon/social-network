@@ -2,7 +2,7 @@
 import React from 'react';
 
 import Form from '../../shared/components/Form';
-import FormInput, { FormVariant } from '../../shared/components/FormInput';
+import FormInput, { FormInputVariant } from '../../shared/components/FormInput';
 
 import { required, inRange, isNotEmpty, isUrl, isEmail } from '../../shared/utils/validation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +12,7 @@ import { updateUser } from '../../store/actions';
 let flag = false;
 
 const EditProfileForm = () => {
-  const { username, email, url } = useSelector((state) => state.userData);
+  const { username, email, image } = useSelector((state) => state.userData);
   const dispatch = useDispatch();
   return (
     <Form
@@ -33,7 +33,7 @@ const EditProfileForm = () => {
       />
       <FormInput
         title={'Email address'}
-        variant={FormVariant.Email}
+        variant={FormInputVariant.Email}
         validation={[
           required('Это поле обязательное'),
           isNotEmpty('Поле не должно быть пустым'),
@@ -43,14 +43,14 @@ const EditProfileForm = () => {
       />
       <FormInput
         title={'New password'}
-        variant={FormVariant.Password}
+        variant={FormInputVariant.Password}
         validation={[inRange(6, 40)('от 6 до 40')]}
         autoComplete="new-password"
       />
       <FormInput
         title={'Avatar image (url)'}
         validation={[isUrl('Введите корректный url')]}
-        value={url}
+        value={image}
       />
     </Form>
   );

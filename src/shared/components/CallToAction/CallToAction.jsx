@@ -2,10 +2,10 @@
 import React from 'react';
 import { Link, Paragraph, SubText } from '../../ui';
 
-const CallToAction = ({call, action, actionLink}) =>
+const CallToAction = ({call, action, to}) =>
 	(<Paragraph fontSize='12px'>
 		<SubText>{call}</SubText>
-		<Link>{action}</Link>
+		<Link to={to}>{action}</Link>
 	</Paragraph>)
 
 

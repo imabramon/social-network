@@ -2,7 +2,7 @@
 import React from 'react';
 
 import Form from '../../shared/components/Form';
-import FormInput, { FormVariant } from '../../shared/components/FormInput';
+import FormInput, { FormInputVariant } from '../../shared/components/FormInput';
 import CallToAction from '../../shared/components/CallToAction';
 import Checkbox from '../../shared/components/Checkbox';
 import { Divider, VStack } from '../../shared/ui';
@@ -13,8 +13,11 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '../../store/actions';
 import { useNavigate } from 'react-router';
 import { PagePath } from '../../consts/pagePath';
+import { useFormContext } from 'react-hook-form';
 
-const Sub = () => <CallToAction call="Already have an account? " action="Sign In" />;
+
+
+const Sub = () => <CallToAction call="Already have an account? " action="Sign In" to={PagePath.userSignIn}/>;
 const Sup = () => (
   <VStack $gap="8px">
     <Divider />
@@ -25,6 +28,7 @@ const Sup = () => (
 const SignUpForm = ({}) => {
   const dispatch = useDispatch();
   const naviagte = useNavigate();
+  
   return (
     <Form
       sub={<Sub />}
@@ -33,10 +37,18 @@ const SignUpForm = ({}) => {
       sumbitText={'Create'}
       onSubmit={async (values) => {
         const { Username: username, 'Email address': email, Password: password } = values;
-       
-          await register(username, email, password);
-          dispatch(loginUser(username));
-          naviagte(PagePath.feed);
+        await register(username, email, password);
+        dispatch(loginUser({username, image: 'https://static.productionready.io/images/smiley-cyrus.jpg'}));
+        naviagte(PagePath.feed);
+        //  try{ 
+          
+        // catch(e){
+        //   const {setError} = useFormContext()
+        //   const {response: {data:{ errors}}} = e
+        //   for(const [field, errorMessege] of Object.entries(errors)){
+        //     setError(mapKeysToTitle[field], errorMessege)
+        //   }
+        // }
         
       }}
     >
@@ -51,12 +63,12 @@ const SignUpForm = ({}) => {
       />
       <FormInput
         title={'Password'}
-        variant={FormVariant.Password}
+        variant={FormInputVariant.Password}
         validation={[required('Это поле обязательное'), inRange(6, 40)('от 6 до 40')]}
       />
       <FormInput
         title={'Repeat Password'}
-        variant={FormVariant.Password}
+        variant={FormInputVariant.Password}
         validation={[required('Это поле обязательное'), isSameAs('Password')('Пароли должны совпадать')]}
       />
     </Form>

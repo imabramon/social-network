@@ -4,6 +4,7 @@ import { Input, InputTitle, Label } from '../../ui';
 import { useFormContext } from 'react-hook-form';
 import { FormInputError } from './FormInputError';
 import { withReactHookValidation } from '../../utils/validation';
+import { css } from 'styled-components';
 
 const FormInput = ({ title, inputProps, titleProps, variant = {}, inputSlot, validation, value, autoComplete }) => {
   const {
@@ -11,6 +12,7 @@ const FormInput = ({ title, inputProps, titleProps, variant = {}, inputSlot, val
     formState: { errors },
     watch,
   } = useFormContext();
+  console.log(errors)
 
   return (
     <Label>
@@ -27,6 +29,7 @@ const FormInput = ({ title, inputProps, titleProps, variant = {}, inputSlot, val
           autoComplete={autoComplete}
           defaultValue={value}
           placeholder={title}
+          $borderColor={errors[title] ? '#f5222d': 'no-change'}
         />
       )}
       <FormInputError error={errors[title]}>{errors?.[title]?.message}</FormInputError>
@@ -45,7 +48,7 @@ FormInput.defaultProps = {
   dinamycValidateConfig: {},
 };
 
-export const FormVariant = {
+export const FormInputVariant = {
   Password: {
     inputProps: {
       type: 'password',

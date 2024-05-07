@@ -2,7 +2,7 @@
 import React from 'react';
 
 import Form from '../../shared/components/Form';
-import FormInput, { FormVariant } from '../../shared/components/FormInput';
+import FormInput, { FormInputVariant } from '../../shared/components/FormInput';
 import CallToAction from '../../shared/components/CallToAction';
 
 import { required, isNotEmpty, isEmail } from '../../shared/utils/validation';
@@ -13,7 +13,7 @@ import { loginUser } from '../../store/actions';
 import { useNavigate } from 'react-router';
 import { PagePath } from '../../consts/pagePath';
 
-const Sub = () => <CallToAction call="Don’t have an account? " action="Sign Up" />;
+const Sub = () => <CallToAction call="Don’t have an account? " action="Sign Up" to={PagePath.userSignUp}/>;
 
 const SignInForm = ({}) => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const SignInForm = ({}) => {
       onSubmit={async (values) => {
         const { Email: email, Password: password } = values;
         
-          const { username, image } = await login(email, password);
+          const { username, image = 'https://static.productionready.io/images/smiley-cyrus.jpg' } = await login(email, password);
           const res = await getUserInfo();
           dispatch(loginUser({ username, email, image }));
           navigate(PagePath.feed);
@@ -44,7 +44,7 @@ const SignInForm = ({}) => {
       />
       <FormInput
         title={'Password'}
-        variant={FormVariant.Password}
+        variant={FormInputVariant.Password}
         validation={[required('Это поле обязательное'), isNotEmpty('Полне не должно быть пустым')]}
       />
     </Form>

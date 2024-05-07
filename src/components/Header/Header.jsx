@@ -58,6 +58,7 @@ const LoggedSide = () => {
         onClick={() => {
           logout();
           dispatch(logoutUser());
+          navigate(PagePath.feed)
         }}
       >
         Log Out

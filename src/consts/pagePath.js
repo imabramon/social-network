@@ -9,7 +9,7 @@ export const PagePath = {
     config: '/articles/edit/:id',
     goTo: (id) => `/articles/edit/${id}`,
   },
-  userSignIn: '/user/signin',
-  userSignUp: '/user/signup',
-  userEdit: '/user/edit',
+  userSignIn: '/sign-in',
+  userSignUp: '/sign-up',
+  userEdit: '/profile',
 };

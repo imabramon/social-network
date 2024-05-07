@@ -14,6 +14,7 @@ const SignUpPage = ({}) => {
 export const SignUpPageStl = styled.div`
 	width: 384px;
 	height: fit-content;
+	margin-top: 30px;
 `;
 
 export default SignUpPage;

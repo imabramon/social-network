@@ -38,11 +38,12 @@ const Pagination = ({ buttonsCount, maxPage, current, onPageChange: pageChangeHa
       const buttonNumber = start + index;
 
       if (buttonNumber === current) {
-        return <ButtonFilled>{buttonNumber}</ButtonFilled>;
+        return <ButtonFilled key={index}>{buttonNumber}</ButtonFilled>;
       }
 
       return (
         <ButtonNoBorder
+        key={index}
           onClick={() => {
             pageChangeHandler(buttonNumber);
           }}

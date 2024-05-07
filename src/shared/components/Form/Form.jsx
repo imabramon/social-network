@@ -5,6 +5,11 @@ import { Container, FormTitle, ProxyForm, VStack } from '../../ui';
 import Button from '../Button';
 import { FormProvider, useForm } from 'react-hook-form';
 
+const mapKeysToTitle ={
+  username: 'Username',
+  email: 'Email address'
+}
+
 const Form = ({
   children,
   formProps,
@@ -18,11 +23,23 @@ const Form = ({
 }) => {
   const SubmitButton = submitButton;
   const methods = useForm();
-  const { handleSubmit, getValues } = methods;
+  const { handleSubmit, setError } = methods;
   return (
     <Container $paddingvertical="48px" $paddinghorizontal="32px">
       <FormProvider {...methods}>
-        <ProxyForm {...formProps} onSubmit={handleSubmit(submitHandler)}>
+        <ProxyForm {...formProps} onSubmit={handleSubmit(async (...args)=>{
+          try{
+            console.log('try')
+            await submitHandler(...args)
+          }catch(e){
+            console.log('catch')
+            const {response: {data:{ errors}}} = e
+            for(const [field, errorMessege] of Object.entries(errors)){
+              console.log(field, errorMessege)
+              setError(mapKeysToTitle[field], {type: 'custom', message: errorMessege})
+            }
+          }
+        })}>
           <VStack $gap="21px">
             <FormTitle>{title}</FormTitle>
             <VStack $gap="12px">{children}</VStack>

@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { withProps } from './utils/withProps';
 
 export const Header = styled.h2`
+  display: inline-block;
   margin: 0;
   padding: 0;
   color: #1890ff;
@@ -11,6 +12,9 @@ export const Header = styled.h2`
   font-size: 20px;
   line-height: 28px;
   width: ${withProps('width', 'unset')};
+  clear: both;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export const NameTitle = styled.span`
@@ -48,7 +52,7 @@ export const HStack = styled.div`
   display: flex;
   width: ${withProps('width', '100%')};
   gap: ${withProps('$gap', 0)};
-  height: ${withProps('height', '100%')}%;
+  height: ${withProps('height', '100%')};
   justify-content: ${withProps('$justifyContent', 'unset')};
   align-items: ${withProps('$alignItems', 'unset')};
   align-self: ${withProps('$alignSelf', 'unset')};
@@ -65,6 +69,8 @@ export const Avatar = styled.img`
   width: 46px;
   height: 46px;
   border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 `;
 
 export const Input = styled.input`
@@ -72,7 +78,8 @@ export const Input = styled.input`
   font-weight: normal;
   line-height: 24px;
   background-color: white;
-  border: 1px solid #d9d9d9;
+  border: 1px solid ;
+  border-color: ${withProps('$borderColor', '#d9d9d9')};
   border-radius: 4px;
   padding: 8px 12px;
   margin: 0px;

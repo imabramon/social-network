@@ -39,6 +39,7 @@ const FormList = ({ title, value, elementPlaceholder }) => {
   const lastInputElement = (
     <FormListElement
       id={inputs.length}
+      key={inputs.length}
       scope={title}
       value={lastInput}
       onAdd={() => {

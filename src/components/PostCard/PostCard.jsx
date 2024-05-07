@@ -52,10 +52,12 @@ const PostCard = ({ id, title, likes: propLikes, tags, description, userInfo: { 
     <Container $paddingvertical="16px" $paddinghorizontal="16px" height="140px">
       <HStack $justifyContent="space-between">
         <PostInfo width="682px" $gap="4px"> 
-          <PostTitle height="fit-content" $gap="13px" >
-            <Header width={isTitleOverflow ? '610px' : 'fit-content'} onClick={goToArticle}>
-              <ContentMayOverflow isOverflow={isTitleOverflow} >{title}</ContentMayOverflow>
-            </Header>
+          <PostTitle height='28px' width={isTitleOverflow ? '610px' : 'fit-content'} $gap="13px" >
+            <ContentMayOverflow isOverflow={isTitleOverflow} >
+              <Header onClick={goToArticle} width='fit-content'>
+                {title}
+              </Header>
+            </ContentMayOverflow>
             <LikesIcon value={likes} onLike={likeArticle} onUnlike={unlikeArticle} isLiked={isLiked}/>
           </PostTitle>
           <TagsContainer height="fit-content" $gap="8px">
