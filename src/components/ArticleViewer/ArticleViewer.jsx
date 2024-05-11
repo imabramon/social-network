@@ -42,6 +42,7 @@ const DateTitle = styled.span`
   font-size: 12px;
   line-height: 12px;
   color: rgba(0, 0, 0, 0.5);
+  text-align: right;
 `
 const EditButton = Button.Small.Highlighted.Action.Fit
 const DeleteButton = Button.Small.Highlighted.Negative.Fit
@@ -182,7 +183,7 @@ function ArticleViewer({
             </TagsContainer>
             <Text>{description}</Text>
           </PostInfo>
-          <SideInfo width="147px" $gap="30px">
+          <SideInfo width="205px" $gap="30px">
             <UserInfo $justifyContent="flex-end" $gap="12px">
               <TextInfo $alignItem="flex-end" width="147px">
                 <NameTitle>{name}</NameTitle>

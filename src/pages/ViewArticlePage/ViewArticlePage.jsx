@@ -33,6 +33,7 @@ function ViewArticlePage({}) {
 export const ViewArticlePageStl = styled.div`
   margin-top: 25px;
   margin-bottom: 65px;
+  width: 938px;
 `
 
 export default ViewArticlePage

@@ -21,6 +21,7 @@ const ButtonReset = styled.button.attrs((props) => ({
   -moz-osx-font-smoothing: inherit;
   -webkit-appearance: none;
   appearance: none;
+  cursor: pointer;
 `
 
 const ButtonAtom = styled(ButtonReset)`

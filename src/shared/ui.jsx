@@ -15,6 +15,7 @@ export const Header = styled.h2`
   clear: both;
   overflow: hidden;
   white-space: nowrap;
+  cursor: ${withProps('$cursor', 'auto')};
 `
 
 export const NameTitle = styled.span`

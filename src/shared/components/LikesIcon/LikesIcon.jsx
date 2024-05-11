@@ -15,6 +15,7 @@ const Icon = styled.span`
   height: 16px;
   background: ${withProps('$bg')};
   align-self: center;
+  cursor: pointer;
 `
 
 function LikesIcon({ value, isLiked = false, onLike, onUnlike }) {

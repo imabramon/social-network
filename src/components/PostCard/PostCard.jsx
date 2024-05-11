@@ -72,7 +72,7 @@ function PostCard({
             $gap="13px"
           >
             <ContentMayOverflow isOverflow={isTitleOverflow}>
-              <Header onClick={goToArticle} width="fit-content">
+              <Header onClick={goToArticle} width="fit-content" $cursor='pointer'>
                 {title}
               </Header>
             </ContentMayOverflow>

@@ -79,6 +79,9 @@ function Header({}) {
           onClick={() => {
             navigate(PagePath.feed)
           }}
+          style={{
+            cursor: 'pointer',
+          }}
         >
           Realworld Blog
         </span>
