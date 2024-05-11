@@ -9,6 +9,16 @@ import Button from '../Button'
 const mapKeysToTitle = {
   username: 'Username',
   email: 'Email address',
+  'email or password': 'Email',
+}
+
+const mapErrorMessege = (field, error) => {
+  switch (field) {
+    case 'email or password':
+      return `${field} ${error}`
+    default:
+      return error
+  }
 }
 
 function Form({
@@ -43,9 +53,10 @@ function Form({
               } = e
               for (const [field, errorMessege] of Object.entries(errors)) {
                 console.log(field, errorMessege)
-                setError(mapKeysToTitle[field], {
+                const mappedField = mapKeysToTitle[field]
+                setError(mappedField, {
                   type: 'custom',
-                  message: errorMessege,
+                  message: mapErrorMessege(field, errorMessege),
                 })
               }
             }
