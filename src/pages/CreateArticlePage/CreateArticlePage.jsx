@@ -32,6 +32,7 @@ function CreateArticlePage({}) {
 export const CreateArticlePageStl = styled.div`
   width: 938px;
   height: fit-content;
+  margin-top: 30px;
 `
 
 export default CreateArticlePage

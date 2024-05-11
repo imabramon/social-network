@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Container, FormTitle, ProxyForm, VStack } from '../../ui'
@@ -34,7 +34,7 @@ function Form({
 }) {
   const SubmitButton = submitButton
   const methods = useForm()
-  const { handleSubmit, setError } = methods
+  const { handleSubmit, setError, formState } = methods
   return (
     <Container $paddingvertical="48px" $paddinghorizontal="32px">
       <FormProvider {...methods}>
@@ -42,23 +42,23 @@ function Form({
           {...formProps}
           onSubmit={handleSubmit(async (...args) => {
             try {
-              console.log('try')
               await submitHandler(...args)
             } catch (e) {
-              console.log('catch')
               const {
                 response: {
                   data: { errors },
                 },
               } = e
+              // eslint-disable-next-line no-restricted-syntax
               for (const [field, errorMessege] of Object.entries(errors)) {
-                console.log(field, errorMessege)
                 const mappedField = mapKeysToTitle[field]
                 setError(mappedField, {
                   type: 'custom',
                   message: mapErrorMessege(field, errorMessege),
                 })
               }
+            } finally {
+              isSubmiting = false
             }
           })}
         >
@@ -66,7 +66,11 @@ function Form({
             <FormTitle>{title}</FormTitle>
             <VStack $gap="12px">{children}</VStack>
             {sup}
-            <SubmitButton {...submitButtonProps} type="submit">
+            <SubmitButton
+              {...submitButtonProps}
+              type="submit"
+              disabled={formState.isSubmitted}
+            >
               {sumbitText}
             </SubmitButton>
             {sub}

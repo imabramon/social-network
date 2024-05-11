@@ -67,15 +67,6 @@ function SignUpForm() {
           })
         )
         naviagte(PagePath.feed)
-        //  try{
-
-        // catch(e){
-        //   const {setError} = useFormContext()
-        //   const {response: {data:{ errors}}} = e
-        //   for(const [field, errorMessege] of Object.entries(errors)){
-        //     setError(mapKeysToTitle[field], errorMessege)
-        //   }
-        // }
       }}
     >
       <FormInput

@@ -78,6 +78,13 @@ export const getArticles = async (page = 1) => {
   return articles.map(mapResponseToPosts)
 }
 
+const asyncTimer = (time) =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, time)
+  })
+
 export const createArticle = async (title, description, body, tags) => {
   const {
     data: {

@@ -22,7 +22,6 @@ function FormInput({
     formState: { errors },
     watch,
   } = useFormContext()
-  console.log(errors)
 
   return (
     <Label>
