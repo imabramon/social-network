@@ -42,6 +42,23 @@ function Pagination({
     current
   )
 
+  const firstPage =
+    start !== 1 ? (
+      <>
+        <ButtonNoBorder
+          key={'firts-btn'}
+          onClick={() => {
+            pageChangeHandler(1)
+          }}
+        >
+          1
+        </ButtonNoBorder>
+        {start > 2 ? (
+          <ButtonNoBorder key={'others-btn'}>...</ButtonNoBorder>
+        ) : null}
+      </>
+    ) : null
+
   const buttons = Array.from({ length })
     .fill(0)
     .map((_, index) => {
@@ -71,6 +88,7 @@ function Pagination({
       >
         <ArrowLeft />
       </ButtonNoBorder>
+      {firstPage}
       {buttons}
       <ButtonNoBorder
         disabled={current === maxPage}
