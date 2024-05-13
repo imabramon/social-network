@@ -60,7 +60,8 @@ const pageLength = 10
 
 const getSkipCountFromLength = (page) => pageLength * (page - 1)
 
-export const getArticles = async (page = 1) => {
+export const getArticles = async () => {
+  const page = 1
   const {
     data: { articles },
   } = await apiServise.get('/articles', {
@@ -75,7 +76,9 @@ export const getArticles = async (page = 1) => {
       : null,
   })
 
-  return articles.map(mapResponseToPosts)
+  const mapped = articles.map(mapResponseToPosts)
+
+  return mapped
 }
 
 export const createArticle = async (title, description, body, tags) => {

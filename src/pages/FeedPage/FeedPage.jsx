@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useSearchParams } from 'react-router-dom'
+import { useQuery } from 'react-query'
 import PostCard from '../../components/PostCard/PostCard'
 import { VStack } from '../../shared/ui'
 import Pagination from '../../shared/components/Pagination/Pagination'
@@ -17,23 +18,21 @@ const NonNaNPass = (value) => {
 }
 
 function FeedPage() {
-  const [posts, setPost] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
   const page = NonNaNPass(searchParams.get('page')) ?? 1
-  const [maxPage, setMaxPAge] = useState(10)
+  const [maxPage] = useState(10)
 
-  useEffect(() => {
-    ;(async () => {
-      const loadedPosts = await getArticles(page)
-      setPost(loadedPosts)
-    })()
-  }, [page])
+  const { data: posts, isLoading } = useQuery({
+    queryKey: ['articles', page],
+    queryFn: getArticles,
+    cacheTime: 0,
+  })
 
   return (
     <FeedPageStl>
       <VStack $gap="26px" $alignItems="center">
-        <LoadableContent isLoading={posts.length === 0}>
-          {componentFactory(posts, PostCard)}
+        <LoadableContent isLoading={isLoading}>
+          {componentFactory(posts ?? [], PostCard)}
         </LoadableContent>
         <Pagination
           current={page}

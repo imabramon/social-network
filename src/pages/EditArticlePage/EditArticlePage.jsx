@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { useNavigate, useParams } from 'react-router'
 import { useQuery } from 'react-query'
