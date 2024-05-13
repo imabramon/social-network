@@ -78,13 +78,6 @@ export const getArticles = async (page = 1) => {
   return articles.map(mapResponseToPosts)
 }
 
-const asyncTimer = (time) =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve()
-    }, time)
-  })
-
 export const createArticle = async (title, description, body, tags) => {
   const {
     data: {
@@ -110,7 +103,7 @@ export const createArticle = async (title, description, body, tags) => {
   return slug
 }
 
-export const loadArticle = async (id) => {
+export const loadArticle = async ({ queryKey: [_, id] }) => {
   const {
     data: { article },
   } = await apiServise.get(`/articles/${encodeURI(id)}`, {

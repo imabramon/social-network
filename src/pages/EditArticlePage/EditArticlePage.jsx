@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useNavigate, useParams } from 'react-router'
+import { useQuery } from 'react-query'
 import ArticleForm from '../../forms/ArticleForm'
 import { loadArticle, editArticle } from '../../api'
 import { PagePath } from '../../consts/pagePath'
@@ -10,20 +11,19 @@ import { PagePath } from '../../consts/pagePath'
 function EditArticlePage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [isLoaded, setLoaded] = useState(false)
-  const [articleData, setArticleData] = useState({})
-  const [textSlot] = useState('Loading...')
 
-  useEffect(() => {
-    loadArticle(id).then((data) => {
-      setArticleData(data)
-      setLoaded(true)
-    })
-  }, [])
+  const {
+    data: articleData,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['article', id],
+    queryFn: loadArticle,
+  })
 
   return (
     <EditArticlePageStl>
-      {isLoaded ? (
+      {!isLoading && !isError ? (
         <ArticleForm
           title="Edit article"
           sumbitText="Send"
@@ -43,7 +43,7 @@ function EditArticlePage() {
           }}
         />
       ) : (
-        <span>{textSlot}</span>
+        <span>{isError ? 'Ошибка, перазагрузите' : 'Загрузка'}</span>
       )}
     </EditArticlePageStl>
   )
