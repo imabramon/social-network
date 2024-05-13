@@ -25,7 +25,6 @@ function FeedPage() {
   const { data: posts, isLoading } = useQuery({
     queryKey: ['articles', page],
     queryFn: getArticles,
-    cacheTime: 0,
   })
 
   return (
