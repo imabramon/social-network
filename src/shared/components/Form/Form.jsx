@@ -40,6 +40,7 @@ function Form({
       <FormProvider {...methods}>
         <ProxyForm
           {...formProps}
+          onChange={() => reset(null, { keepValues: true, keepErrors: true })}
           onSubmit={handleSubmit(async (...args) => {
             try {
               await submitHandler(...args)
@@ -49,11 +50,9 @@ function Form({
                   data: { errors },
                 },
               } = e
-              reset(formState.validatingFields, { keepValues: true })
               // eslint-disable-next-line no-restricted-syntax
               for (const [field, errorMessege] of Object.entries(errors)) {
                 const mappedField = mapKeysToTitle[field]
-
                 setError(mappedField, {
                   type: 'custom',
                   message: mapErrorMessege(field, errorMessege),
