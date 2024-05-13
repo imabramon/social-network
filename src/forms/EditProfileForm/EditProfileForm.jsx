@@ -14,7 +14,7 @@ import {
   isEmail,
 } from '../../shared/utils/validation'
 import { update } from '../../api'
-import { updateUser } from '../../store/actions'
+import { updateUser } from '../../store/reducer'
 
 const flag = false
 

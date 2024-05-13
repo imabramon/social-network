@@ -10,7 +10,7 @@ import CallToAction from '../../shared/components/CallToAction'
 
 import { required, isNotEmpty, isEmail } from '../../shared/utils/validation'
 import { getUserInfo, login } from '../../api'
-import { loginUser } from '../../store/actions'
+import { loginUser } from '../../store/reducer'
 import { PagePath } from '../../consts/pagePath'
 
 function Sub() {

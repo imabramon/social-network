@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Container, FormTitle, ProxyForm, VStack } from '../../ui'
@@ -34,7 +34,7 @@ function Form({
 }) {
   const SubmitButton = submitButton
   const methods = useForm()
-  const { handleSubmit, setError, formState } = methods
+  const { handleSubmit, setError, formState, reset } = methods
   return (
     <Container $paddingvertical="48px" $paddinghorizontal="32px">
       <FormProvider {...methods}>
@@ -49,16 +49,16 @@ function Form({
                   data: { errors },
                 },
               } = e
+              reset(formState.validatingFields, { keepValues: true })
               // eslint-disable-next-line no-restricted-syntax
               for (const [field, errorMessege] of Object.entries(errors)) {
                 const mappedField = mapKeysToTitle[field]
+
                 setError(mappedField, {
                   type: 'custom',
                   message: mapErrorMessege(field, errorMessege),
                 })
               }
-            } finally {
-              isSubmiting = false
             }
           })}
         >

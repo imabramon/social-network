@@ -36,7 +36,7 @@ export const isSameAs = (inputName) => (message) => ({
 
 function isValidHttpUrl(string) {
   try {
-    URL(string)
+    const url = new URL(string)
   } catch (_) {
     return false
   }

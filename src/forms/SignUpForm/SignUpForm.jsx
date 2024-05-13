@@ -18,7 +18,7 @@ import {
   isSameAs,
 } from '../../shared/utils/validation'
 import { register } from '../../api'
-import { loginUser } from '../../store/actions'
+import { loginUser } from '../../store/reducer'
 import { PagePath } from '../../consts/pagePath'
 
 function Sub() {

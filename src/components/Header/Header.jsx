@@ -9,7 +9,7 @@ import Button from '../../shared/components/Button'
 import withLoggedSwitch from '../../shared/hoc/withLoggedSwitch'
 import { PagePath } from '../../consts/pagePath'
 import { logout } from '../../api'
-import { logoutUser } from '../../store/actions'
+import { logoutUser } from '../../store/reducer'
 
 const ButtonNoBorder = Button.Normal.NoBorder.Neutral.Fit
 const ButtonHighlighted = Button.Normal.Highlighted.Action.Fit
@@ -70,7 +70,7 @@ function LoggedSide() {
   )
 }
 
-function Header({}) {
+function Header() {
   const navigate = useNavigate()
   return (
     <HeaderStl>
