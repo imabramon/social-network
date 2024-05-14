@@ -61,8 +61,7 @@ const pageLength = 10
 
 const getSkipCountFromLength = (page) => pageLength * (page - 1)
 
-export const getArticles = async () => {
-  const page = 1
+export const getArticles = async ({ queryKey: [_, page = 1] }) => {
   const {
     data: { articles },
   } = await apiServise.get('/articles', {
