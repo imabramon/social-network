@@ -35,7 +35,6 @@ function Form({
   const SubmitButton = submitButton
   const methods = useForm()
   const { handleSubmit, setError, formState, reset } = methods
-  console.log(formState.isSubmitted, formState.isSubmitting)
   return (
     <Container $paddingvertical="48px" $paddinghorizontal="32px">
       <FormProvider {...methods}>
