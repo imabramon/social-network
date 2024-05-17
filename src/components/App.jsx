@@ -1,3 +1,4 @@
+import React from 'react'
 import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import FeedPage from '../pages/FeedPage'
