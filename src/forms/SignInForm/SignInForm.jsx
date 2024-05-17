@@ -37,10 +37,11 @@ function SignInForm() {
         const {
           username,
           image = 'https://static.productionready.io/images/smiley-cyrus.jpg',
+          token,
         } = await login(email, password)
 
         await getUserInfo()
-        dispatch(loginUser({ username, email, image }))
+        dispatch(loginUser({ username, email, image, token }))
         navigate(PagePath.feed)
       }}
     >

@@ -29,6 +29,10 @@ export const logout = () => {
   token = null
 }
 
+export const setToken = (newtoken) => {
+  token = newtoken
+}
+
 export const register = async (username, email, password) => {
   const answer = await apiServise.post('/users', {
     user: { username, email, password },

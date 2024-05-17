@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import { HiddenSpan, SubText } from '../../ui'
 import { withProps } from '../../utils/withProps'
 
@@ -20,12 +22,18 @@ const Icon = styled.span`
 
 function LikesIcon({ value, isLiked = false, onLike, onUnlike }) {
   const [liked, setLiked] = useState(isLiked)
+  const isLogged = useSelector((state) => state.userData.logged)
   return (
     <LikesIconStl>
       <HiddenSpan>Likes count</HiddenSpan>
       <Icon
         $bg={liked ? "url('/like__liked.svg')" : "url('/like.svg')"}
         onClick={() => {
+          if (!isLogged) {
+            toast('Вы не авторизованы')
+            return
+          }
+
           if (liked) {
             onUnlike().then((res) => res && setLiked(false))
             return

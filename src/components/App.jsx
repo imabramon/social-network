@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
+import { useSelector } from 'react-redux'
 import FeedPage from '../pages/FeedPage'
 import ViewArticlePage from '../pages/ViewArticlePage'
 import SignInPage from '../pages/SignInPage'
@@ -14,6 +15,7 @@ import { Background } from '../shared/ui'
 import { PagePath } from '../consts/pagePath'
 import ErrorBoundary from './ErrorBoundary'
 import ScrollToTop from '../shared/components/ScrollToTop'
+import { setToken } from '../api'
 
 const GlobalStyle = createGlobalStyle`
   :root{
@@ -36,6 +38,11 @@ const GlobalStyle = createGlobalStyle`
 `
 
 function App() {
+  const token = useSelector((state) => state.userData.token)
+  useEffect(() => {
+    setToken(token)
+  }, [])
+
   return (
     <>
       <GlobalStyle />

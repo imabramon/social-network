@@ -59,11 +59,12 @@ function SignUpForm() {
           'Email address': email,
           Password: password,
         } = values
-        await register(username, email, password)
+        const { token } = await register(username, email, password)
         dispatch(
           loginUser({
             username,
             image: 'https://static.productionready.io/images/smiley-cyrus.jpg',
+            token,
           })
         )
         naviagte(PagePath.feed)
