@@ -40,7 +40,7 @@ function SignInForm() {
           token,
         } = await login(email, password)
 
-        await getUserInfo()
+        // await getUserInfo()
         dispatch(loginUser({ username, email, image, token }))
         navigate(PagePath.feed)
       }}

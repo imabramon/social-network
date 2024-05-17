@@ -35,6 +35,7 @@ function Form({
   const SubmitButton = submitButton
   const methods = useForm()
   const { handleSubmit, setError, formState, reset } = methods
+  console.log(formState.isSubmitted, formState.isSubmitting)
   return (
     <Container $paddingvertical="48px" $paddinghorizontal="32px">
       <FormProvider {...methods}>
@@ -68,7 +69,7 @@ function Form({
             <SubmitButton
               {...submitButtonProps}
               type="submit"
-              disabled={formState.isSubmitted}
+              disabled={formState.isSubmitted || formState.isSubmitting}
             >
               {sumbitText}
             </SubmitButton>
