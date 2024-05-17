@@ -11,20 +11,15 @@ import 'react-toastify/dist/ReactToastify.css'
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <>
-    <React.StrictMode>
-      <div>
-        <ToastContainer />
-      </div>
-      <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          <PersistGate loading={<div>loading...</div>} persistor={persistor}>
-            {/* <App /> */}
-
-            <App />
-          </PersistGate>
-        </Provider>
-      </QueryClientProvider>
-    </React.StrictMode>
-  </>
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <PersistGate loading={<div>loading...</div>} persistor={persistor}>
+          {/* <App /> */}
+          <ToastContainer />
+          <App />
+        </PersistGate>
+      </Provider>
+    </QueryClientProvider>
+  </React.StrictMode>
 )

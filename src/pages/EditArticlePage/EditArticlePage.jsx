@@ -19,19 +19,8 @@ function EditArticlePage() {
   ])
 
   const goBackWithNotify = (msg) => {
-    setTimeout(
-      () =>
-        toast(msg, {
-          autoClose: 5000,
-        }),
-      1
-    )
-    navigate(-1)
-    // ;(async () => {
-    //   toast(msg, {
-    //     autoClose: 5000,
-    //   })
-    // })()
+    toast(msg)
+    navigate('/', { replace: true })
   }
 
   const {
