@@ -1,7 +1,10 @@
 import React from 'react'
 
-export const componentFactory = (data, ComponentBasic) =>
-  data.map((item, index) => {
+export const componentFactory = (data, ComponentBasic) => {
+  if (data.length === 0) return null
+  return data.map((item, index) => {
+    if (!item) return null
+
     const { key = index, id, ...restItem } = item
     switch (true) {
       case typeof item === 'object':
@@ -10,3 +13,4 @@ export const componentFactory = (data, ComponentBasic) =>
         return <ComponentBasic key={id ?? key}>{item}</ComponentBasic>
     }
   })
+}
